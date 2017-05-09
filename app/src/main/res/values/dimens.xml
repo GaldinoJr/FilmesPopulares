@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margem_padrao">10dp</dimen>
+    <dimen name="tv_size_titulo">36sp</dimen>
+    <dimen name="margem_grande">35dp</dimen>
+    <dimen name="tv_size_subtitulo">30sp</dimen>
+    <dimen name="tv_size_texto">16sp</dimen>
+    <dimen name="margem_media">20dp</dimen>
+</resources>

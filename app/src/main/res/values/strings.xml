@@ -3,4 +3,6 @@
     <string name="activity_name_filmes">Filmes populares</string>
     <string name="menu_melhor_avaliado">Melhor avaliado</string>
     <string name="menu_mais_popular">Mais popular</string>
+    <string name="text_bt_favoritar">Tornar Favorito</string>
+    <string name="trailers">Trailers</string>
 </resources>
