@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.galdino.filmespopulares.Dominio.Filme;
+import com.example.galdino.filmespopulares.Dominio.Result;
+import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.databinding.AdapterListFilmesBinding;
 import com.squareup.picasso.Picasso;
 
@@ -19,11 +21,11 @@ import java.util.List;
 
 public class AdapterListFilmes extends RecyclerView.Adapter<AdapterListFilmes.AdapteListFilmesViewHolder>
 {
-    private List<Filme> mListFilmes;
+    private List<Result> mListFilmes;
     private ListenerAdapter mListener;
     private int altura;
 
-    public AdapterListFilmes(List<Filme> mListFilmes, int y) {
+    public AdapterListFilmes(List<Result> mListFilmes, int y) {
         this.mListFilmes = mListFilmes;
         this.altura = y;
     }
@@ -44,7 +46,7 @@ public class AdapterListFilmes extends RecyclerView.Adapter<AdapterListFilmes.Ad
                     int position = getAdapterPosition();
                     if(mListener != null && position != RecyclerView.NO_POSITION)
                     {
-                        Filme filme = mListFilmes.get(position);
+                        Result filme = mListFilmes.get(position);
                         mListener.onClickList(filme);
                     }
                 }
@@ -78,8 +80,11 @@ public class AdapterListFilmes extends RecyclerView.Adapter<AdapterListFilmes.Ad
         if(holder.mBinding!= null && holder.mBinding.ivCapaFilme != null)
         {
             Context context = holder.mBinding.ivCapaFilme.getContext();
-            if(mListFilmes.get(position) != null && mListFilmes.get(position).getIdFotoCapaFilme()!= null)
-                Picasso.with(context).load(mListFilmes.get(position).getIdFotoCapaFilme()).into(holder.mBinding.ivCapaFilme);
+            if(mListFilmes.get(position) != null && mListFilmes.get(position).getPosterPath()!= null)
+            {
+                String urlCapa = context.getResources().getString(R.string.url_images) + mListFilmes.get(position).getPosterPath();
+                Picasso.with(context).load(urlCapa).into(holder.mBinding.ivCapaFilme);
+            }
         }
     }
 
@@ -99,6 +104,6 @@ public class AdapterListFilmes extends RecyclerView.Adapter<AdapterListFilmes.Ad
     }
     public interface ListenerAdapter
     {
-        void onClickList(Filme filme);
+        void onClickList(Result filme);
     }
 }
