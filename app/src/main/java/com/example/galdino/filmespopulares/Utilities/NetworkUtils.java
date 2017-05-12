@@ -46,8 +46,11 @@ public class NetworkUtils
 
     public static URL buildUrl(Context context, String metodo)
     {
-        String urlMetodo = context.getResources().getString(R.string.url_api) + metodo;
-        Uri builtUri = Uri.parse(urlMetodo).buildUpon()
+        String urlLink = context.getResources().getString(R.string.url_api);// + metodo;
+
+        Uri builtUri = Uri.parse(urlLink)
+                .buildUpon()
+                .appendPath(metodo)
                 .appendQueryParameter(API_KEY, context.getResources().getString(R.string.chave_api))
                 .build();
 

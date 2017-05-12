@@ -13,10 +13,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.galdino.filmespopulares.Adapter.AdapterListFilmes;
-import com.example.galdino.filmespopulares.Dominio.Filme;
 import com.example.galdino.filmespopulares.Dominio.Result;
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.Utilities.NetworkUtils;
@@ -28,13 +26,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ActivityFilmesPopulares extends AppCompatActivity {
-    private Integer[] mIdsFilmes = {R.drawable.ft_capa_rocky, R.drawable.foto_capa_em_busca_felicidade, R.drawable.foto_capa_exterminador_5, R.drawable.ft_capa_harry_potter, R.drawable.ft_capa_rambo};
-    //
     private ActivityFilmesPopularesBinding mBinding;
     //
     private List<Result> mListFilmes;
     private Context activity;
     private NetworkUtils mNetworkUtils;
+    private int y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,21 +44,21 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
         activity = this;
         mNetworkUtils = new NetworkUtils();
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_filmes_populares);
+        //
+        mBinding.rvFilmes.setHasFixedSize(true);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 2);
+        mBinding.rvFilmes.setLayoutManager(gridLayoutManager);
+        //
+        Display display = ActivityFilmesPopulares.this.getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        y = size.y;
+        y = (int) y / 2;
+        y += -80;
         if (mBinding != null) {
-            new atCarregarFilmes().execute(getResources().getString(R.string.metodo_listar));
+            new atCarregarFilmes().execute(getResources().getString(R.string.metodo_popular));
         }
     }
-
-//    private void carregarFilmes()
-//    {
-//
-//        for(int i = 0; i < mIdsFilmes.length; i++)
-//        {
-//            Filme f = new Filme();
-//            f.setIdFotoCapaFilme(mIdsFilmes[i]);
-//            mListFilmes.add(f);
-//        }
-//    }
 
     private class atCarregarFilmes extends AsyncTask<String, String, String> {
         @Override
@@ -90,23 +87,10 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if (mListFilmes != null && mListFilmes.size() > 0) {
-                mBinding.rvFilmes.setHasFixedSize(true);
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 2);
-
-                Display display = ActivityFilmesPopulares.this.getWindowManager().getDefaultDisplay();
-                Point size = new Point();
-                display.getSize(size);
-                int y = size.y;
-                y = (int) y / 2;
-                y += -80;
-
                 AdapterListFilmes adapterListFilmes = new AdapterListFilmes(mListFilmes, y);
 
                 if (mListener != null)
                     adapterListFilmes.setListFilmesClickListener(mListener);
-
-                mBinding.rvFilmes.setLayoutManager(gridLayoutManager);
-
                 mBinding.rvFilmes.setAdapter(adapterListFilmes);
             }
             mBinding.pbLoading.setVisibility(View.INVISIBLE);
@@ -125,17 +109,25 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.item_menu_mais_popular:
-                Toast.makeText(this, "mais popular", Toast.LENGTH_LONG).show();
+                setTitle(getResources().getString(R.string.filmes_populares));
+                new atCarregarFilmes().execute(getResources().getString(R.string.metodo_popular));
+                break;
             case R.id.item_menu_melhor_avaliado:
-                Toast.makeText(this, "melhor avaliado", Toast.LENGTH_LONG).show();
+                setTitle(getResources().getString(R.string.filmes_melhor_avaliado));
+                new atCarregarFilmes().execute(getResources().getString(R.string.metodo_melhor_avaliado));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private AdapterListFilmes.ListenerAdapter mListener = new AdapterListFilmes.ListenerAdapter() {
         @Override
-        public void onClickList(Result filme) {
-            chamarProximaTela(ActivityFilmesDetalhe.class, null);
+        public void onClickList(Result result)
+        {
+            Intent intent = new Intent();
+            intent.putExtra(ActivityFilmesDetalhe.KEY_RESULT,result);
+            intent.putExtra(ActivityFilmesDetalhe.KEY_TITULO,getTitle());
+            chamarProximaTela(ActivityFilmesDetalhe.class, intent);
         }
     };
 

@@ -3,14 +3,17 @@ package com.example.galdino.filmespopulares.Dominio;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Galdino on 11/05/2017.
  */
 
-public class Result
+public class Result implements Serializable
 {
+    private boolean fgFavorito;
+
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
@@ -53,6 +56,14 @@ public class Result
     @SerializedName("vote_average")
     @Expose
     private Double voteAverage;
+
+    public boolean isFgFavorito() {
+        return fgFavorito;
+    }
+
+    public void setFgFavorito(boolean fgFavorito) {
+        this.fgFavorito = fgFavorito;
+    }
 
     public String getPosterPath() {
         return posterPath;

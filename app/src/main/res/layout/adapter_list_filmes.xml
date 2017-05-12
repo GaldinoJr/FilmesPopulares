@@ -12,7 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@drawable/foto_capa_em_busca_felicidade"
             />
         <!--<View-->
             <!--android:id="@+id/view"-->

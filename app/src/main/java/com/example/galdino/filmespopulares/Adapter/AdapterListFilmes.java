@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.galdino.filmespopulares.Dominio.Filme;
 import com.example.galdino.filmespopulares.Dominio.Result;
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.databinding.AdapterListFilmesBinding;
@@ -82,7 +81,7 @@ public class AdapterListFilmes extends RecyclerView.Adapter<AdapterListFilmes.Ad
             Context context = holder.mBinding.ivCapaFilme.getContext();
             if(mListFilmes.get(position) != null && mListFilmes.get(position).getPosterPath()!= null)
             {
-                String urlCapa = context.getResources().getString(R.string.url_images) + mListFilmes.get(position).getPosterPath();
+                String urlCapa = context.getResources().getString(R.string.url_images_185) + mListFilmes.get(position).getPosterPath();
                 Picasso.with(context).load(urlCapa).into(holder.mBinding.ivCapaFilme);
             }
         }
