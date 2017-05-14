@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.temaActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/c_icon_azul</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 </resources>

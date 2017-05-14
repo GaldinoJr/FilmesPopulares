@@ -2,18 +2,45 @@
 <layout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.galdino.filmespopulares.UI.Activits.ActivityFilmesPopulares">
+        android:background="@drawable/ic_background"
+        tools:context="com.example.galdino.filmespopulares.UI.Activits.ActivityFilmesPopulares"
+        >
+
+        <ImageView
+            android:layout_marginTop="@dimen/margem_media"
+            android:layout_marginLeft="@dimen/margem_media"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_pop_corn_blue"/>
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/toolbar"></include>
+
+        <TextView
+            android:id="@+id/tv_label_tipos_filmes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filmes_populares"
+            android:textSize="@dimen/tv_size_titulo"
+            android:textColor="@android:color/white"
+            android:layout_below="@+id/tool_bar"
+            android:layout_marginRight="@dimen/margem_media"
+            android:layout_marginTop="@dimen/margem_padrao"
+            android:layout_marginLeft="@dimen/margem_media"
+            android:textStyle="bold"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_filmes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
+            android:layout_below="@+id/tv_label_tipos_filmes"
+            android:layout_marginRight="@dimen/margem_media"
+            android:layout_marginTop="@dimen/margem_padrao"
+            >
 
         </android.support.v7.widget.RecyclerView>
         <ProgressBar

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.example.galdino.filmespopulares.Dominio.Result;
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.databinding.AdapterListFilmesBinding;
+import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,11 +23,10 @@ public class AdapterListFilmes extends RecyclerView.Adapter<AdapterListFilmes.Ad
 {
     private List<Result> mListFilmes;
     private ListenerAdapter mListener;
-    private int altura;
 
-    public AdapterListFilmes(List<Result> mListFilmes, int y) {
+
+    public AdapterListFilmes(List<Result> mListFilmes) {
         this.mListFilmes = mListFilmes;
-        this.altura = y;
     }
 
 
@@ -58,16 +58,8 @@ public class AdapterListFilmes extends RecyclerView.Adapter<AdapterListFilmes.Ad
     public AdapteListFilmesViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        //View view = layoutInflater.inflate(R.layout.adapter_list_filmes,parent, false);
         AdapterListFilmesBinding adapterListFilmesBinding =
                 AdapterListFilmesBinding.inflate(layoutInflater,parent,false);
-//        int height = parent.getMeasuredHeight() / 4;
-//
-//        adapterListFilmesBinding.rlContainer2.setMinimumHeight(height);
-//
-        GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) adapterListFilmesBinding.getRoot().getLayoutParams();
-        params.height = altura;
-        adapterListFilmesBinding.getRoot().setLayoutParams(params);
 
         return new AdapteListFilmesViewHolder(adapterListFilmesBinding);
     }

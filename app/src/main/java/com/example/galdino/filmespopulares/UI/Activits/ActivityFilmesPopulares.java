@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +32,6 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
     private List<Result> mListFilmes;
     private Context activity;
     private NetworkUtils mNetworkUtils;
-    private int y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +49,11 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 2);
         mBinding.rvFilmes.setLayoutManager(gridLayoutManager);
         //
-        Display display = ActivityFilmesPopulares.this.getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        y = size.y;
-        y = (int) y / 2;
-        y += -80;
-        if (mBinding != null) {
+        if (mBinding != null)
+        {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+            setSupportActionBar(toolbar);
+            setTitle("");
             new atCarregarFilmes().execute(getResources().getString(R.string.metodo_popular));
         }
     }
@@ -72,7 +70,7 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
             if (params[0] != null) {
                 mListFilmes = new LinkedList<>();
                 try {
-                    URL url = mNetworkUtils.buildUrl(activity, params[0]);
+                    URL url = mNetworkUtils.buildUrl(activity, params[0], false);
                     String retorno = mNetworkUtils.getResponseFromHttpUrl(url);
                     mListFilmes = mNetworkUtils.getList(retorno);
                 } catch (IOException e) {
@@ -87,7 +85,7 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if (mListFilmes != null && mListFilmes.size() > 0) {
-                AdapterListFilmes adapterListFilmes = new AdapterListFilmes(mListFilmes, y);
+                AdapterListFilmes adapterListFilmes = new AdapterListFilmes(mListFilmes);
 
                 if (mListener != null)
                     adapterListFilmes.setListFilmesClickListener(mListener);
@@ -109,11 +107,11 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.item_menu_mais_popular:
-                setTitle(getResources().getString(R.string.filmes_populares));
+                mBinding.tvLabelTiposFilmes.setText(getResources().getString(R.string.filmes_populares));
                 new atCarregarFilmes().execute(getResources().getString(R.string.metodo_popular));
                 break;
             case R.id.item_menu_melhor_avaliado:
-                setTitle(getResources().getString(R.string.filmes_melhor_avaliado));
+                mBinding.tvLabelTiposFilmes.setText(getResources().getString(R.string.filmes_melhor_avaliado));
                 new atCarregarFilmes().execute(getResources().getString(R.string.metodo_melhor_avaliado));
                 break;
         }
@@ -125,8 +123,9 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
         public void onClickList(Result result)
         {
             Intent intent = new Intent();
-            intent.putExtra(ActivityFilmesDetalhe.KEY_RESULT,result);
-            intent.putExtra(ActivityFilmesDetalhe.KEY_TITULO,getTitle());
+            if(result.getId() != null)
+                intent.putExtra(ActivityFilmesDetalhe.KEY_ID,result.getId());
+            //intent.putExtra(ActivityFilmesDetalhe.KEY_TITULO,getTitle());
             chamarProximaTela(ActivityFilmesDetalhe.class, intent);
         }
     };

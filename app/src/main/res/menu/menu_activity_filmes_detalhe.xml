@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/im_filmes_detalhe_favorito"
-        android:icon="@drawable/ic_favorito_vazio"
+        android:icon="@drawable/ic_favorito_vazio_azul"
         android:title=""
         app:showAsAction="ifRoom"/>
 </menu>

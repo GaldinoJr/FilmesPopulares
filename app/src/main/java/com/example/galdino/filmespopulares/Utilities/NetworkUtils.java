@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.galdino.filmespopulares.Dominio.Filme;
 import com.example.galdino.filmespopulares.Dominio.Result;
 import com.example.galdino.filmespopulares.R;
+import com.example.galdino.filmespopulares.VideoDetalhe.FilmeDetalhe;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ import java.util.Scanner;
 public class NetworkUtils
 {
     private static final String API_KEY = "api_key";
+    private static final String APPEND_TO_RESPONSE = "append_to_response";
 
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -43,16 +45,21 @@ public class NetworkUtils
             urlConnection.disconnect();
         }
     }
-
-    public static URL buildUrl(Context context, String metodo)
+    // TODO separar em dois metodos!!
+    public static URL buildUrl(Context context, String metodo, boolean fgApend)
     {
         String urlLink = context.getResources().getString(R.string.url_api);// + metodo;
 
-        Uri builtUri = Uri.parse(urlLink)
+        Uri.Builder builder = Uri.parse(urlLink)
                 .buildUpon()
                 .appendPath(metodo)
-                .appendQueryParameter(API_KEY, context.getResources().getString(R.string.chave_api))
-                .build();
+                .appendQueryParameter(API_KEY, context.getResources().getString(R.string.chave_api));
+        if(fgApend)
+        {
+            builder.appendQueryParameter(APPEND_TO_RESPONSE, "videos");
+        }
+
+        Uri builtUri = builder.build();
 
         URL url = null;
         try {
@@ -70,5 +77,11 @@ public class NetworkUtils
         Gson gson = new Gson();
         Filme filme = gson.fromJson(retorno, Filme.class);
         return filme.getResults();
+    }
+
+    public FilmeDetalhe getFilmeDetalhe(String retorno) {
+        Gson gson = new Gson();
+        FilmeDetalhe filmeDetalhe = gson.fromJson(retorno, FilmeDetalhe.class);
+        return filmeDetalhe;
     }
 }

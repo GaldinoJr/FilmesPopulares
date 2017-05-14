@@ -11,26 +11,6 @@ import java.util.List;
 
 public class Filme
 {
-
-//    private Integer idFotoCapaFilme;
-//    private String dsNomeFilme;
-//
-//    // Gets
-//    public Integer getIdFotoCapaFilme() {
-//        return idFotoCapaFilme;
-//    }
-//    public String getDsNomeFilme() {
-//        return dsNomeFilme;
-//    }
-//
-//    // Sets
-//    public void setIdFotoCapaFilme(Integer idFotoCapaFilme) {
-//        this.idFotoCapaFilme = idFotoCapaFilme;
-//    }
-//    public void setDsNomeFilme(String dsNomeFilme) {
-//        this.dsNomeFilme = dsNomeFilme;
-//    }
-
     @SerializedName("page")
     @Expose
     private Integer page;

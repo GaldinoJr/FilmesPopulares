@@ -1,24 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <RelativeLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rl_container2"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margem_media">
 
-        <ImageView
-            android:id="@+id/iv_capa_filme"
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cv_capa"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            card_view:cardBackgroundColor="@android:color/transparent"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="10dp"
+            card_view:contentPadding="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_capa_filme"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="centerCrop"
+                    />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/tv_nome_filme"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            />
-        <!--<View-->
-            <!--android:id="@+id/view"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="2dp"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--&gt;-->
-        <!--</View>-->
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margem_padrao"
+            android:layout_alignLeft="@+id/cv_capa"
+            android:layout_alignRight="@+id/cv_capa"
+            android:layout_marginLeft="@dimen/margem_padrao"
+            android:layout_marginRight="@dimen/margem_padrao"
+            android:text="Guardians of the galaxy Vol. 2"
+            android:textColor="@color/c_letra_azul"
+            android:textSize="@dimen/tv_size_texto"
+            android:layout_below="@+id/cv_capa"
+            android:maxLines="2"/>
     </RelativeLayout>
 </layout>

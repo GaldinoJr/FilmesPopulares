@@ -1,28 +1,40 @@
 package com.example.galdino.filmespopulares.UI.Activits;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.os.Build;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.galdino.filmespopulares.Dominio.Result;
+
 import com.example.galdino.filmespopulares.R;
+import com.example.galdino.filmespopulares.Utilities.NetworkUtils;
+import com.example.galdino.filmespopulares.VideoDetalhe.FilmeDetalhe;
 import com.example.galdino.filmespopulares.databinding.ActivityFilmesDetalheBinding;
+import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.LinkedList;
 
 public class ActivityFilmesDetalhe extends AppCompatActivity
 {
-    public static final String KEY_RESULT = "com.example.galdino.filmespopulares.UI.Activits.KEY_RESULT";
-    public static final String KEY_TITULO = "com.example.galdino.filmespopulares.UI.Activits.KEY_TITULO";
+    public static final String KEY_ID = "com.example.galdino.filmespopulares.UI.Activits.KEY_ID";
     //
     private ActivityFilmesDetalheBinding mBinding;
-    private Result mResult;
-    private String mTituloTela;
+    private FilmeDetalhe mFilmeDetalhe;
+    private NetworkUtils mNetworkUtils;
+    private Activity mActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,30 +44,26 @@ public class ActivityFilmesDetalhe extends AppCompatActivity
 
     private void carregarControles()
     {
+        //
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_filmes_detalhe);
         Intent intent = getIntent();
-        mResult = (Result) intent.getSerializableExtra(KEY_RESULT);
-        mTituloTela = intent.getStringExtra(KEY_TITULO);
-        if(mResult != null && mBinding != null)
-        {
-            setTitle(mTituloTela);
+        mNetworkUtils = new NetworkUtils();
+        mActivity = this;
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
 
-            String urlCapa = getResources().getString(R.string.url_images_500) + mResult.getPosterPath();
-            Picasso.with(this).load(urlCapa).into(mBinding.ivCapaFilme);
-            mBinding.tvNomeFilme.setText(mResult.getTitle());
-            if(mResult.getReleaseDate()!= null)
-            {
-                String ano = mResult.getReleaseDate().substring(0,mResult.getReleaseDate().indexOf("-"));
-                mBinding.tvAno.setText(ano);
-            }
-            //mBinding.tvTempoFilme.setText(mResult.ge);
-            if(mResult.getVoteAverage() != null)
-            {
-                String nota =  Double.toString(mResult.getVoteAverage()) + "/10";
-                mBinding.tvNotaFilme.setText(nota);
-            }
-            mBinding.tvDescricaoFilme.setText(mResult.getOverview());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("");
+        //
+        int idFilme = intent.getIntExtra(KEY_ID,0);
+        if(idFilme == 0)
+        {
+            Toast.makeText(this,getResources().getString(R.string.erro_id_filme),Toast.LENGTH_LONG).show();
+            finish();
+            return;
         }
+        //
+        new atCarregarDetalheFilme(idFilme).execute();
     }
 
     @Override
@@ -70,20 +78,80 @@ public class ActivityFilmesDetalhe extends AppCompatActivity
         int id = item.getItemId();
         if(id == R.id.im_filmes_detalhe_favorito)
         {
-            if(mResult.isFgFavorito())
+            if(mFilmeDetalhe.isFgFavorito())
             {
-                item.setIcon(ContextCompat.getDrawable(this,R.drawable.ic_favorito_vazio));
-                mResult.setFgFavorito(false);
+                item.setIcon(ContextCompat.getDrawable(this,R.drawable.ic_favorito_vazio_azul));
+                mFilmeDetalhe.setFgFavorito(false);
             }
             else
             {
-                item.setIcon(ContextCompat.getDrawable(this,R.drawable.ic_favorito_preenchido));
-                mResult.setFgFavorito(true);
+                item.setIcon(ContextCompat.getDrawable(this,R.drawable.ic_favorito_preenchido_azul));
+                mFilmeDetalhe.setFgFavorito(true);
             }
         }
         else {
             finish();
         }
-        return true;//super.onOptionsItemSelected(item);
+        return true;
+    }
+
+    private class atCarregarDetalheFilme extends AsyncTask<String, String, String> {
+        private final int idFilme;
+
+        public atCarregarDetalheFilme(int idFilme) {
+            this.idFilme = idFilme;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mBinding.pbLoading.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            if (idFilme >0) {
+                //mListFilmes = new LinkedList<>();
+                try {
+                    URL url = mNetworkUtils.buildUrl(mActivity, Integer.toString(idFilme),true);
+                    String retorno = mNetworkUtils.getResponseFromHttpUrl(url);
+                    mFilmeDetalhe = mNetworkUtils.getFilmeDetalhe(retorno);
+                    //mListFilmes = mNetworkUtils.getList(retorno);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if(mFilmeDetalhe != null && mBinding != null)
+            {
+                String urlCapa = getResources().getString(R.string.url_images_500) + mFilmeDetalhe.getPosterPath();
+                IncludeCapaFilmeBinding includeCapaFilmeBinding = mBinding.inclCapaFilme;
+                Picasso.with(mBinding.getRoot().getContext()).load(urlCapa).into(includeCapaFilmeBinding.ivCapaFilme);
+                mBinding.tvNomeFilme.setText(mFilmeDetalhe.getTitle());
+                if(mFilmeDetalhe.getReleaseDate()!= null)
+                {
+                    String ano = mFilmeDetalhe.getReleaseDate().substring(0,mFilmeDetalhe.getReleaseDate().indexOf("-"));
+                    mBinding.tvAno.setText(ano);
+                }
+                if(mFilmeDetalhe.getRuntime() != null)
+                {
+                    String tempo = Integer.toString(mFilmeDetalhe.getRuntime());
+                    mBinding.tvTempoFilme.setText(tempo + "min");
+                }
+                if(mFilmeDetalhe.getVoteAverage() != null)
+                {
+                    String nota =  Double.toString(mFilmeDetalhe.getVoteAverage()) + "/10";
+                    mBinding.tvNotaFilme.setText(nota);
+                }
+                mBinding.tvDescricaoFilme.setText(mFilmeDetalhe.getOverview());
+            }
+            mBinding.pbLoading.setVisibility(View.INVISIBLE);
+        }
     }
 }

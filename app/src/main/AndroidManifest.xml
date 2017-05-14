@@ -12,14 +12,18 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".UI.Activits.ActivityFilmesPopulares"
-            android:label="@string/activity_name_filmes">
+            android:label="@string/activity_name_filmes"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Activits.ActivityFilmesDetalhe"></activity>
+        <activity
+            android:name=".UI.Activits.ActivityFilmesDetalhe"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
