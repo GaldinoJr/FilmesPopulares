@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FilmesPopulares</string>
+    <string name="activity_name_filmes">@string/filmes_populares</string>
+    <string name="menu_melhor_avaliado">Melhor avaliado</string>
+    <string name="menu_mais_popular">Mais popular</string>
+    <string name="text_bt_favoritar">Tornar Favorito</string>
+    <string name="trailers">Trailers</string>
+
+    <string name="url_api">https://api.themoviedb.org/3/movie</string>
+    <string name="url_images_500">https://image.tmdb.org/t/p/w500</string>
+    <string name="metodo_popular">popular</string>
+    <string name="metodo_melhor_avaliado">top_rated</string>
+    <string name="filmes_populares" >Filmes populares</string>
+    <string name="filmes_melhor_avaliado">Filmes melhor avaliado</string>
+    <string name="url_images_185">https://image.tmdb.org/t/p/w185</string>
+    <string name="erro_id_filme">Erro ao receber o ID do filme</string>
+</resources>
