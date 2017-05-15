@@ -45,20 +45,40 @@ public class NetworkUtils
             urlConnection.disconnect();
         }
     }
-    // TODO separar em dois metodos!!
-    public static URL buildUrl(Context context, String metodo, boolean fgApend)
+
+    private static Uri.Builder buildUrl(Context context, String metodo)
     {
-        String urlLink = context.getResources().getString(R.string.url_api);// + metodo;
+        String urlLink = context.getResources().getString(R.string.url_api);
 
         Uri.Builder builder = Uri.parse(urlLink)
                 .buildUpon()
                 .appendPath(metodo)
                 .appendQueryParameter(API_KEY, context.getResources().getString(R.string.chave_api));
-        if(fgApend)
-        {
-            builder.appendQueryParameter(APPEND_TO_RESPONSE, "videos");
+
+        return builder;
+    }
+
+    public static URL buildUrlVideos(Context context, String metodo)
+    {
+        Uri.Builder builder = buildUrl(context,metodo);
+        Uri builtUri = builder.build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
 
+        Log.v("Teste", "Built URI " + url);
+
+        return url;
+    }
+
+    public static URL buildUrlVideoDetalhe(Context context, String metodo)
+    {
+        Uri.Builder builder = buildUrl(context,metodo);
+        builder.appendQueryParameter(APPEND_TO_RESPONSE, "videos");
         Uri builtUri = builder.build();
 
         URL url = null;

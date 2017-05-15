@@ -113,7 +113,7 @@ public class ActivityFilmesDetalhe extends AppCompatActivity
             if (idFilme >0) {
                 //mListFilmes = new LinkedList<>();
                 try {
-                    URL url = mNetworkUtils.buildUrl(mActivity, Integer.toString(idFilme),true);
+                    URL url = mNetworkUtils.buildUrlVideoDetalhe(mActivity, Integer.toString(idFilme));
                     String retorno = mNetworkUtils.getResponseFromHttpUrl(url);
                     mFilmeDetalhe = mNetworkUtils.getFilmeDetalhe(retorno);
                     //mListFilmes = mNetworkUtils.getList(retorno);
@@ -130,6 +130,7 @@ public class ActivityFilmesDetalhe extends AppCompatActivity
         protected void onPostExecute(String s) {
             if(mFilmeDetalhe != null && mBinding != null)
             {
+                mBinding.inclCapaFilme.getRoot().setVisibility(View.VISIBLE);
                 String urlCapa = getResources().getString(R.string.url_images_500) + mFilmeDetalhe.getPosterPath();
                 IncludeCapaFilmeBinding includeCapaFilmeBinding = mBinding.inclCapaFilme;
                 Picasso.with(mBinding.getRoot().getContext()).load(urlCapa).into(includeCapaFilmeBinding.ivCapaFilme);

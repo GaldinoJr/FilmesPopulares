@@ -58,22 +58,29 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
         }
     }
 
-    private class atCarregarFilmes extends AsyncTask<String, String, String> {
+    private class atCarregarFilmes extends AsyncTask<String, String, String>
+    {
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             super.onPreExecute();
             mBinding.pbLoading.setVisibility(View.VISIBLE);
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            if (params[0] != null) {
+        protected String doInBackground(String... params)
+        {
+            if (params[0] != null)
+            {
                 mListFilmes = new LinkedList<>();
-                try {
-                    URL url = mNetworkUtils.buildUrl(activity, params[0], false);
+                try
+                {
+                    URL url = mNetworkUtils.buildUrlVideos(activity, params[0]);
                     String retorno = mNetworkUtils.getResponseFromHttpUrl(url);
                     mListFilmes = mNetworkUtils.getList(retorno);
-                } catch (IOException e) {
+                }
+                catch (IOException e)
+                {
                     e.printStackTrace();
                 }
             }
@@ -83,12 +90,15 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            if (mListFilmes != null && mListFilmes.size() > 0) {
+        protected void onPostExecute(String s)
+        {
+            if (mListFilmes != null && mListFilmes.size() > 0)
+            {
                 AdapterListFilmes adapterListFilmes = new AdapterListFilmes(mListFilmes);
-
                 if (mListener != null)
+                {
                     adapterListFilmes.setListFilmesClickListener(mListener);
+                }
                 mBinding.rvFilmes.setAdapter(adapterListFilmes);
             }
             mBinding.pbLoading.setVisibility(View.INVISIBLE);
@@ -96,14 +106,16 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_activity_filmes_populares, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         int id = item.getItemId();
         switch (id) {
             case R.id.item_menu_mais_popular:
@@ -125,7 +137,6 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
             Intent intent = new Intent();
             if(result.getId() != null)
                 intent.putExtra(ActivityFilmesDetalhe.KEY_ID,result.getId());
-            //intent.putExtra(ActivityFilmesDetalhe.KEY_TITULO,getTitle());
             chamarProximaTela(ActivityFilmesDetalhe.class, intent);
         }
     };

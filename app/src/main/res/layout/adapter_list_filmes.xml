@@ -29,7 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     />
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -42,7 +42,6 @@
             android:layout_alignRight="@+id/cv_capa"
             android:layout_marginLeft="@dimen/margem_padrao"
             android:layout_marginRight="@dimen/margem_padrao"
-            android:text="Guardians of the galaxy Vol. 2"
             android:textColor="@color/c_letra_azul"
             android:textSize="@dimen/tv_size_texto"
             android:layout_below="@+id/cv_capa"
