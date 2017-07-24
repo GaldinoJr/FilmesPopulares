@@ -14,10 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.galdino.filmespopulares.Dominio.Result;
-
 import com.example.galdino.filmespopulares.R;
-import com.example.galdino.filmespopulares.Utilities.NetworkUtils;
+import com.example.galdino.filmespopulares.utilities.NetworkUtils;
 import com.example.galdino.filmespopulares.VideoDetalhe.FilmeDetalhe;
 import com.example.galdino.filmespopulares.databinding.ActivityFilmesDetalheBinding;
 import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
@@ -25,7 +23,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedList;
 
 public class ActivityFilmesDetalhe extends AppCompatActivity
 {

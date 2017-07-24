@@ -15,7 +15,8 @@ public class ListFilmModel implements ListFilmMvpModel
     private FilmeApiMvpHelper mHelper;
     @Override
     public Single<List<Filme>> getPopularMovies() {
-        return null;
+        return mHelper.getPopular()
+                .singleOrError();
     }
 
     @Override

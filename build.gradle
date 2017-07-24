@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.android.tools.build:gradle:2.3.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -16,8 +16,28 @@ allprojects {
     repositories {
         jcenter()
     }
+
+    project.ext{
+        androidLibrariesVersion = "25.1.0"
+        buildToolsVersion = "25.0.2"
+
+        rxjavaVersion = "2.1.1"
+        rxandroidVersion = "2.0.1"
+    }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+// Garante que as versões sejam iguais
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion project.ext.androidLibrariesVersion
+            }
+        }
+    }
 }

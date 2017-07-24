@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.Utilities;
+package com.example.galdino.filmespopulares.utilities;
 
 import android.content.Context;
 import android.net.Uri;
