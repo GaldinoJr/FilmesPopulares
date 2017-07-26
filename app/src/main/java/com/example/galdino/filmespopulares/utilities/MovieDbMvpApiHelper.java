@@ -1,6 +1,7 @@
 package com.example.galdino.filmespopulares.utilities;
 
 import com.example.galdino.filmespopulares.Dominio.Filme;
+import com.example.galdino.filmespopulares.Dominio.Result;
 
 import java.util.List;
 
@@ -12,9 +13,9 @@ import io.reactivex.Observable;
 
 public interface MovieDbMvpApiHelper
 {
-    Observable<List<Filme>> getPopular();
+    Observable<List<Result>> getPopular();
 
-    Observable<List<Filme>> getTopRated();
+    Observable<List<Result>> getTopRated();
 
     Observable<Filme> getMovie(String movieId);
 

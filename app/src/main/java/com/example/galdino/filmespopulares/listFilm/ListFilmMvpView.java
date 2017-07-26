@@ -1,6 +1,7 @@
 package com.example.galdino.filmespopulares.listFilm;
 
 import com.example.galdino.filmespopulares.Dominio.Filme;
+import com.example.galdino.filmespopulares.Dominio.Result;
 import com.example.galdino.filmespopulares.mvp.MvpView;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public interface ListFilmMvpView extends MvpView
 {
-    void onMoviesReady(List<Filme> movies);
+    void onMoviesReady(List<Result> movies);
 
     void onGetMoviesFailed();
 

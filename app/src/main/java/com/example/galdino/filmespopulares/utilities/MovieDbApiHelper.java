@@ -3,12 +3,16 @@ package com.example.galdino.filmespopulares.utilities;
 import android.content.Context;
 
 import com.example.galdino.filmespopulares.Dominio.Filme;
+import com.example.galdino.filmespopulares.Dominio.Result;
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.VideoDetalhe.FilmeDetalhe;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -30,12 +34,12 @@ public class MovieDbApiHelper implements MovieDbMvpApiHelper
     private static final String MOVIE_ID_PATH = "movieId";
     //private static final String GET_MOVIE_PATH = "3/movie/{" + MOVIE_ID_PATH + "}";
 
-    private final MovieDbApiHelper mTheMovieDbApi;
+    private final MovieDbApi mMovieDbApi;
     private String mApiKey;
 
     public MovieDbApiHelper(Context context) {
         Retrofit retrofit = getRetrofit();
-        mTheMovieDbApi = retrofit.create(MovieDbApiHelper.class);
+        mMovieDbApi = retrofit.create(MovieDbApi.class);
 
         if (context != null) {
             mApiKey = context.getString(R.string.chave_api);
@@ -43,12 +47,13 @@ public class MovieDbApiHelper implements MovieDbMvpApiHelper
     }
 
     @Override
-    public Observable<List<Filme>> getPopular() {
-        return null;
+    public Observable<List<Result>> getPopular() {
+        return mMovieDbApi.getPopular(mApiKey)
+                .flatMap(getMovieResponseMapper());
     }
 
     @Override
-    public Observable<List<Filme>> getTopRated() {
+    public Observable<List<Result>> getTopRated() {
         return null;
     }
 
@@ -72,7 +77,19 @@ public class MovieDbApiHelper implements MovieDbMvpApiHelper
                 .build();
     }
 
-    interface TheMovieDbApi {
+    @android.support.annotation.NonNull
+    private Function<Filme, Observable<List<Result>>> getMovieResponseMapper() {
+        return new Function<Filme, Observable<List<Result>>>() {
+            @Override
+            public Observable<List<Result>> apply(@NonNull Filme moviesResponseBody) throws Exception {
+
+                return Observable.just(moviesResponseBody.getResults());
+            }
+        };
+    }
+
+
+    interface MovieDbApi {
 
         @GET(METODO_POPULAR)
         Observable<Filme> getPopular(@Query(PARAMETER_CHAVE_API) String apiKey);
