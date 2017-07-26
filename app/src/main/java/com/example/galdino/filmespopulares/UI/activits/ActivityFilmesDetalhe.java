@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.UI.Activits;
+package com.example.galdino.filmespopulares.UI.activits;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.utilities.NetworkUtils;
-import com.example.galdino.filmespopulares.VideoDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.videoDetalhe.FilmeDetalhe;
 import com.example.galdino.filmespopulares.databinding.ActivityFilmesDetalheBinding;
 import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
 import com.squareup.picasso.Picasso;

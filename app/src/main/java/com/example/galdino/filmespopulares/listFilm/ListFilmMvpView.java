@@ -1,7 +1,6 @@
 package com.example.galdino.filmespopulares.listFilm;
 
-import com.example.galdino.filmespopulares.Dominio.Filme;
-import com.example.galdino.filmespopulares.Dominio.Result;
+import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.mvp.MvpView;
 
 import java.util.List;

@@ -2,12 +2,11 @@ package com.example.galdino.filmespopulares.utilities;
 
 import android.content.Context;
 
-import com.example.galdino.filmespopulares.Dominio.Filme;
-import com.example.galdino.filmespopulares.Dominio.Result;
+import com.example.galdino.filmespopulares.dominio.Filme;
+import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.R;
-import com.example.galdino.filmespopulares.VideoDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.videoDetalhe.FilmeDetalhe;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.Observable;

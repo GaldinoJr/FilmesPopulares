@@ -1,16 +1,14 @@
-package com.example.galdino.filmespopulares.Adapter;
+package com.example.galdino.filmespopulares.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.galdino.filmespopulares.Dominio.Result;
+import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.databinding.AdapterListFilmesBinding;
-import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

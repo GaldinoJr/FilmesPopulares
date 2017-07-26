@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.Dominio;
+package com.example.galdino.filmespopulares.dominio;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

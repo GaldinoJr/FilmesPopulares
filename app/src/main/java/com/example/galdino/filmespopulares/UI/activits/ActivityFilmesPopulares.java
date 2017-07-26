@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.UI.Activits;
+package com.example.galdino.filmespopulares.UI.activits;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,8 +13,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.galdino.filmespopulares.Adapter.AdapterListFilmes;
-import com.example.galdino.filmespopulares.Dominio.Result;
+import com.example.galdino.filmespopulares.adapter.AdapterListFilmes;
+import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.utilities.NetworkUtils;
 import com.example.galdino.filmespopulares.databinding.ActivityFilmesPopularesBinding;

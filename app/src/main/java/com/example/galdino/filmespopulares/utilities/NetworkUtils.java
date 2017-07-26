@@ -4,10 +4,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
-import com.example.galdino.filmespopulares.Dominio.Filme;
-import com.example.galdino.filmespopulares.Dominio.Result;
+import com.example.galdino.filmespopulares.dominio.Filme;
+import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.R;
-import com.example.galdino.filmespopulares.VideoDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.videoDetalhe.FilmeDetalhe;
 import com.google.gson.Gson;
 
 import java.io.IOException;

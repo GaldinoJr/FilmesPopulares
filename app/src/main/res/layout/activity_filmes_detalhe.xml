@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/ic_background"
-        tools:context="com.example.galdino.filmespopulares.UI.Activits.ActivityFilmesDetalhe">
+        tools:context="com.example.galdino.filmespopulares.UI.activits.ActivityFilmesDetalhe">
 
         <include
             android:id="@+id/tool_bar"

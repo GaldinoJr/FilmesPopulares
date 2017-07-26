@@ -1,7 +1,7 @@
 package com.example.galdino.filmespopulares.utilities;
 
-import com.example.galdino.filmespopulares.Dominio.Filme;
-import com.example.galdino.filmespopulares.Dominio.Result;
+import com.example.galdino.filmespopulares.dominio.Filme;
+import com.example.galdino.filmespopulares.dominio.Result;
 
 import java.util.List;
 

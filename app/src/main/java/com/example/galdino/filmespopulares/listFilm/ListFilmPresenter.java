@@ -1,6 +1,6 @@
 package com.example.galdino.filmespopulares.listFilm;
 
-import com.example.galdino.filmespopulares.Dominio.Filme;
+import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.mvp.BasePresenter;
 import com.example.galdino.filmespopulares.mvp.SchedulerProvider;
 

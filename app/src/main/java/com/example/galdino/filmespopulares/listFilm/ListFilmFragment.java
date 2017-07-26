@@ -1,8 +1,6 @@
 package com.example.galdino.filmespopulares.listFilm;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,11 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.galdino.filmespopulares.Adapter.AdapterListFilmes;
-import com.example.galdino.filmespopulares.Dominio.Filme;
-import com.example.galdino.filmespopulares.Dominio.Result;
-import com.example.galdino.filmespopulares.R;
-import com.example.galdino.filmespopulares.UI.Activits.ActivityFilmesDetalhe;
+import com.example.galdino.filmespopulares.adapter.AdapterListFilmes;
+import com.example.galdino.filmespopulares.dominio.Result;
+import com.example.galdino.filmespopulares.UI.activits.ActivityFilmesDetalhe;
 import com.example.galdino.filmespopulares.databinding.FragmentFragListFilmBinding;
 
 import java.util.List;
