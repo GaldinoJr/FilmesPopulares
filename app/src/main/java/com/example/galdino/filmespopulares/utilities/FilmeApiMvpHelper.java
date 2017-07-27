@@ -8,10 +8,10 @@ import java.util.List;
 import io.reactivex.Observable;
 
 /**
- * Created by Galdino on 23/07/2017.
+ * Created by Galdino on 20/07/2017.
  */
 
-public interface MovieDbMvpApiHelper
+public interface FilmeApiMvpHelper
 {
     Observable<List<Result>> getPopular();
 

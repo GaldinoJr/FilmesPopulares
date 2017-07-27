@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.galdino.filmespopulares.listFilm.ActivityFilmesList">
 
+    <fragment
+        android:id="@+id/fragm_list_film"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:name="com.example.galdino.filmespopulares.listFilm.ListFilmFragment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
 </android.support.constraint.ConstraintLayout>

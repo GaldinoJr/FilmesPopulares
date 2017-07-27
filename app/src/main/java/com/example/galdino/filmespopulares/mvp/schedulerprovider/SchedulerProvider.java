@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.mvp;
+package com.example.galdino.filmespopulares.mvp.schedulerprovider;
 
 import io.reactivex.Scheduler;
 

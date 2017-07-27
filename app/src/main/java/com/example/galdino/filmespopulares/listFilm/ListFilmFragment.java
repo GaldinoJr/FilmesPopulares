@@ -13,11 +13,17 @@ import com.example.galdino.filmespopulares.adapter.AdapterListFilmes;
 import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.UI.activits.ActivityFilmesDetalhe;
 import com.example.galdino.filmespopulares.databinding.FragmentFragListFilmBinding;
+import com.example.galdino.filmespopulares.mvp.di.AppComponent;
+import com.example.galdino.filmespopulares.mvp.di.DaggerAppComponent;
+import com.example.galdino.filmespopulares.mvp.di.modules.ModelModule;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class ListFilmFragment extends Fragment implements ListFilmMvpView, SwipeRefreshLayout.OnRefreshListener{
     FragmentFragListFilmBinding mBinding;
+    ListFilmMvpPresenter listFilmPresenter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,9 +34,21 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         mBinding.rvFilmes.setLayoutManager(gridLayoutManager);
 
+        AppComponent appComponent = DaggerAppComponent.builder()
+                .modelModule(new ModelModule(getContext().getApplicationContext()))
+                .build();
+        appComponent.inject(this);
+
         onRefresh();
 
         return mBinding.getRoot();
+    }
+
+    @Inject
+    public void setPresenter(ListFilmMvpPresenter listFilmMvpPresenter) {
+        this.listFilmPresenter = listFilmMvpPresenter;
+        // Vincula a view ao presenter
+        listFilmMvpPresenter.attach(this);
     }
 
     @Override
@@ -60,7 +78,7 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
 
     @Override
     public void onGetMovies() {
-
+        listFilmPresenter.getPopularMovies();
     }
 
     @Override

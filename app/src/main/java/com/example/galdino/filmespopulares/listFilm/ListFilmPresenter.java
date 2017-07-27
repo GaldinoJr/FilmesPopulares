@@ -1,8 +1,8 @@
 package com.example.galdino.filmespopulares.listFilm;
 
-import com.example.galdino.filmespopulares.dominio.Filme;
+import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.mvp.BasePresenter;
-import com.example.galdino.filmespopulares.mvp.SchedulerProvider;
+import com.example.galdino.filmespopulares.mvp.schedulerprovider.SchedulerProvider;
 
 import java.util.List;
 
@@ -38,15 +38,15 @@ public class ListFilmPresenter extends BasePresenter<ListFilmMvpView> implements
 
     }
 
-    private SingleObserver<List<Filme>> getFilmesObserver() {
-        return new SingleObserver<List<Filme>>() {
+    private SingleObserver<List<Result>> getFilmesObserver() {
+        return new SingleObserver<List<Result>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 mMvpView.onGettingMovies(true);
             }
 
             @Override
-            public void onSuccess(@NonNull List<Filme> movies) {
+            public void onSuccess(@NonNull List<Result> movies) {
                 mMvpView.onMoviesReady(movies);
                 mMvpView.onGettingMovies(false);
             }
@@ -71,7 +71,7 @@ public class ListFilmPresenter extends BasePresenter<ListFilmMvpView> implements
     private ListFilmMvpView getEmptyView() {
         return new ListFilmMvpView() {
             @Override
-            public void onMoviesReady(List<Filme> movies) {
+            public void onMoviesReady(List<Result> movies) {
             }
             @Override
             public void onGetMoviesFailed() {

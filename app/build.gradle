@@ -28,6 +28,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    testCompile "org.mockito:mockito-core:" + project.ext.mockitoVersion
+
     //    compile 'com.android.support:percent:25.3.1'
     compile 'com.android.support:appcompat-v7:' + project.ext.androidLibrariesVersion
     compile 'com.android.support:recyclerview-v7:' + project.ext.androidLibrariesVersion
@@ -44,4 +46,8 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     testCompile 'junit:junit:4.12'
+
+    //Ðagger2 Dependency Injection
+    compile 'com.google.dagger:dagger:' + project.ext.daggerVersion
+    annotationProcessor "com.google.dagger:dagger-compiler:" + project.ext.daggerVersion
 }

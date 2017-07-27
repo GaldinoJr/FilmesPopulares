@@ -1,6 +1,7 @@
 package com.example.galdino.filmespopulares.listFilm;
 
 import com.example.galdino.filmespopulares.dominio.Filme;
+import com.example.galdino.filmespopulares.dominio.Result;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import io.reactivex.Single;
 
 public interface ListFilmMvpModel
 {
-    Single<List<Filme>> getPopularMovies();
+    Single<List<Result>> getPopularMovies();
 
     Single<List<Filme>> getTopRatedMovies();
 

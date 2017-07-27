@@ -1,6 +1,8 @@
 package com.example.galdino.filmespopulares.listFilm;
 
 import com.example.galdino.filmespopulares.dominio.Filme;
+import com.example.galdino.filmespopulares.dominio.Result;
+import com.example.galdino.filmespopulares.utilities.FilmeApiMvpHelper;
 
 import java.util.List;
 
@@ -13,8 +15,14 @@ import io.reactivex.Single;
 public class ListFilmModel implements ListFilmMvpModel
 {
     private FilmeApiMvpHelper mHelper;
+
+    public ListFilmModel(FilmeApiMvpHelper helper)
+    {
+        mHelper = helper;
+    }
+
     @Override
-    public Single<List<Filme>> getPopularMovies() {
+    public Single<List<Result>> getPopularMovies() {
         return mHelper.getPopular()
                 .singleOrError();
     }

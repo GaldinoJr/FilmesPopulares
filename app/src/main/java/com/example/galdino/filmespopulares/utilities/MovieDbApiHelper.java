@@ -23,11 +23,11 @@ import retrofit2.http.Query;
  * Created by Galdino on 23/07/2017.
  */
 
-public class MovieDbApiHelper implements MovieDbMvpApiHelper
+public class MovieDbApiHelper implements FilmeApiMvpHelper
 {
     private static final String METODO_POPULAR = "popular";
     private static final String METODO_MELHOR_AVALIADO = "top_rated";
-    private static final String URL_API = "https://api.themoviedb.org/3/movie";
+    private static final String URL_API = "https://api.themoviedb.org/3/movie/";
     private static final String PARAMETER_CHAVE_API = "api_key";
 
     private static final String MOVIE_ID_PATH = "movieId";
