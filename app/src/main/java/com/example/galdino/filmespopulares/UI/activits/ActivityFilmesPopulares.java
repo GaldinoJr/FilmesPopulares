@@ -107,7 +107,7 @@ public class ActivityFilmesPopulares extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_activity_filmes_populares, menu);
+        menuInflater.inflate(R.menu.menu_activity_filmes_list, menu);
         return true;
     }
 

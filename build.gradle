@@ -20,9 +20,11 @@ allprojects {
     project.ext{
         androidLibrariesVersion = "25.1.0"
         buildToolsVersion = "25.0.2"
+        mockitoVersion = "2.0.2-beta"
 
         rxjavaVersion = "2.1.1"
         rxandroidVersion = "2.0.1"
+        daggerVersion = "2.11"
     }
 }
 

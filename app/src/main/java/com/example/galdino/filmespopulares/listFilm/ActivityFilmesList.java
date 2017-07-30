@@ -1,11 +1,12 @@
 package com.example.galdino.filmespopulares.listFilm;
 
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.example.galdino.filmespopulares.R;
-import com.example.galdino.filmespopulares.mvp.MvpView;
 
 public class ActivityFilmesList extends AppCompatActivity {
 
@@ -14,5 +15,17 @@ public class ActivityFilmesList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filmes_list);
 
+        ListFilmFragment fragment = new ListFilmFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.frame_frament_list, fragment).commit();
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_activity_filmes_list,menu);
+        return true;
     }
 }

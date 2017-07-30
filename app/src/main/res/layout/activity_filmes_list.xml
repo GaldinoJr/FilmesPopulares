@@ -1,20 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.galdino.filmespopulares.listFilm.ActivityFilmesList">
+<layout>
 
-    <fragment
-        android:id="@+id/fragm_list_film"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:name="com.example.galdino.filmespopulares.listFilm.ListFilmFragment"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_background"
+        tools:context="com.example.galdino.filmespopulares.listFilm.ActivityFilmesList">
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="@dimen/margem_media"
+            android:layout_marginStart="@dimen/margem_media"
+            android:layout_marginTop="@dimen/margem_media"
+            android:src="@drawable/ic_pop_corn_blue"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/toolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_label_tipos_filmes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margem_media"
+            android:layout_marginRight="@dimen/margem_media"
+            android:layout_marginTop="@dimen/margem_padrao"
+            android:text="@string/filmes_populares"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tv_size_titulo"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tool_bar" />
+
+        <FrameLayout
+            android:id="@+id/frame_frament_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margem_padrao"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_label_tipos_filmes" />
+
+        <!--<fragment-->
+            <!--android:id="@+id/fragm_list_film"-->
+            <!--android:name="com.example.galdino.filmespopulares.listFilm.ListFilmFragment"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_marginTop="@dimen/margem_padrao"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/tv_label_tipos_filmes" />-->
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>
