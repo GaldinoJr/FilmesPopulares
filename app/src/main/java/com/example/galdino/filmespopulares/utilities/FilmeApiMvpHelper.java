@@ -15,7 +15,7 @@ public interface FilmeApiMvpHelper
 {
     Observable<List<Result>> getPopular();
 
-    Observable<List<Result>> getTopRated();
+    Observable<List<Result>> getMelhorAvaliado();
 
     Observable<Filme> getMovie(String movieId);
 

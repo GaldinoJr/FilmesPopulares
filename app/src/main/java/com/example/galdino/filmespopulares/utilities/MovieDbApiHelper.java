@@ -52,8 +52,9 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     }
 
     @Override
-    public Observable<List<Result>> getTopRated() {
-        return null;
+    public Observable<List<Result>> getMelhorAvaliado() {
+        return mMovieDbApi.getMelhorAvaliado(mApiKey)
+                .flatMap(getMovieResponseMapper());
     }
 
     @Override
@@ -94,7 +95,7 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
         Observable<Filme> getPopular(@Query(PARAMETER_CHAVE_API) String apiKey);
 
         @GET(METODO_MELHOR_AVALIADO)
-        Observable<Filme> getTopRated(@Query(PARAMETER_CHAVE_API) String apiKey);
+        Observable<Filme> getMelhorAvaliado(@Query(PARAMETER_CHAVE_API) String apiKey);
 
         @GET(MOVIE_ID_PATH)
         Observable<FilmeDetalhe> getMovie(@Path(MOVIE_ID_PATH) String movieId,

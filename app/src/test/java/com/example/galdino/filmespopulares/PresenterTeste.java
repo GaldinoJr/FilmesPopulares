@@ -43,7 +43,7 @@ public class PresenterTeste
     public void setUp()
     {
         MockitoAnnotations.initMocks(this);
-        when(dataManager.getPopularMovies()).thenReturn(Single.just(mResults));
+        when(dataManager.getFilmesPopulares()).thenReturn(Single.just(mResults));
 
         mTestScheduler = new TestScheduler();
         SchedulerProvider schedulerProvider = new SchedulerProvider() {
@@ -65,13 +65,13 @@ public class PresenterTeste
     @Test
     public void getPopular_modelError_false()
     {
-        when(dataManager.getPopularMovies()).thenReturn(Single.<List<Result>>error(new Exception("Mocked error")));
-        mvpPresenter.getPopularMovies();
+        when(dataManager.getFilmesPopulares()).thenReturn(Single.<List<Result>>error(new Exception("Mocked error")));
+        mvpPresenter.getFilmesPopulares();
         mTestScheduler.triggerActions();
 
-        verify(mvpView).onGetMoviesFailed();
+        verify(mvpView).onFalhaBuscandoFilmes();
 //        Nunca cahamnou uma lista com filmes
-        verify(mvpView, never()).onMoviesReady(anyListOf(Result.class));
-        verify(mvpView).onGettingMovies(false);
+        verify(mvpView, never()).onFilmesPreparados(anyListOf(Result.class));
+        verify(mvpView).onBuscandoFilmes(false);
     }
 }

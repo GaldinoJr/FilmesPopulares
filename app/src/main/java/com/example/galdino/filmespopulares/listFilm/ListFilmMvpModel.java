@@ -13,9 +13,9 @@ import io.reactivex.Single;
 
 public interface ListFilmMvpModel
 {
-    Single<List<Result>> getPopularMovies();
+    Single<List<Result>> getFilmesPopulares();
 
-    Single<List<Filme>> getTopRatedMovies();
+    Single<List<Result>> getFilmesMelhorAvaliados();
 
     Single<Filme> getMovie(String movieId);
 
@@ -24,6 +24,4 @@ public interface ListFilmMvpModel
     Single<String> getMovieTitle(String movieId);
 
     Single<Filme> getMovieSummary(String movieId);
-
-    void saveMovieOnCache(Filme movie);
 }

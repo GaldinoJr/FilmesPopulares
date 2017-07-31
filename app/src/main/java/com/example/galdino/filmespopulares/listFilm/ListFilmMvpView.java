@@ -11,11 +11,11 @@ import java.util.List;
 
 public interface ListFilmMvpView extends MvpView
 {
-    void onMoviesReady(List<Result> movies);
+    void onFilmesPreparados(List<Result> movies);
 
-    void onGetMoviesFailed();
+    void onFalhaBuscandoFilmes();
 
-    void onGettingMovies(boolean isGetting);
+    void onBuscandoFilmes(boolean isGetting);
 
-    void onGetMovies();
+    void onGetFilmes();
 }

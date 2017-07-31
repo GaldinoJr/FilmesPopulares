@@ -21,9 +21,31 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class ListFilmFragment extends Fragment implements ListFilmMvpView, SwipeRefreshLayout.OnRefreshListener{
-    FragmentFragListFilmBinding mBinding;
-    ListFilmMvpPresenter listFilmPresenter;
+public class ListFilmFragment extends Fragment implements ListFilmMvpView, SwipeRefreshLayout.OnRefreshListener
+{
+    public static final String EXTRA_TIPO_PESQUISA = "EXTRA_TIPO_PESQUISA";
+    public static final int DF_FILMES_POPULARES = 1001;
+    public static final int DF_FILMES_MELHOR_AVALIADO = 1002;
+    private FragmentFragListFilmBinding mBinding;
+    private ListFilmMvpPresenter listFilmPresenter;
+    private int mTipoPesquisa;
+
+    public static ListFilmFragment newInstance(Bundle data) {
+        ListFilmFragment fragment = new ListFilmFragment();
+        fragment.setArguments(data);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            mTipoPesquisa = arguments.getInt(EXTRA_TIPO_PESQUISA, DF_FILMES_POPULARES);
+        }
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,7 +74,7 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
     }
 
     @Override
-    public void onMoviesReady(List<Result> listaFilmes) {
+    public void onFilmesPreparados(List<Result> listaFilmes) {
         if (listaFilmes != null)
         {
 //            int posterWidth = getResources().getDimensionPixelSize(R.dimen.movie_poster_size_median);
@@ -64,26 +86,35 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
             mBinding.rvFilmes.setAdapter(adapterListFilmes);
         }
         mBinding.rvFilmes.setVisibility(View.VISIBLE);
+        mBinding.pbLoading.setVisibility(View.INVISIBLE);
     }
 
     @Override
-    public void onGetMoviesFailed() {
-
-    }
-
-    @Override
-    public void onGettingMovies(boolean isGetting) {
+    public void onFalhaBuscandoFilmes() {
 
     }
 
     @Override
-    public void onGetMovies() {
-        listFilmPresenter.getPopularMovies();
+    public void onBuscandoFilmes(boolean isGetting) {
+
+    }
+
+    @Override
+    public void onGetFilmes()
+    {
+        mBinding.pbLoading.setVisibility(View.VISIBLE);
+        if(mTipoPesquisa == DF_FILMES_POPULARES) {
+            listFilmPresenter.getFilmesPopulares();
+        }
+        else
+        {
+            listFilmPresenter.getFilmesMelhorAvaliados();
+        }
     }
 
     @Override
     public void onRefresh() {
-        onGetMovies();
+        onGetFilmes();
     }
 
     private AdapterListFilmes.ListenerAdapter mListener = new AdapterListFilmes.ListenerAdapter() {

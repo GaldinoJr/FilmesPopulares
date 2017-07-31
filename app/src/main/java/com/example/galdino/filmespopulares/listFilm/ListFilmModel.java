@@ -22,14 +22,15 @@ public class ListFilmModel implements ListFilmMvpModel
     }
 
     @Override
-    public Single<List<Result>> getPopularMovies() {
+    public Single<List<Result>> getFilmesPopulares() {
         return mHelper.getPopular()
                 .singleOrError();
     }
 
     @Override
-    public Single<List<Filme>> getTopRatedMovies() {
-        return null;
+    public Single<List<Result>> getFilmesMelhorAvaliados() {
+        return mHelper.getMelhorAvaliado()
+                .singleOrError();
     }
 
     @Override
@@ -50,10 +51,5 @@ public class ListFilmModel implements ListFilmMvpModel
     @Override
     public Single<Filme> getMovieSummary(String movieId) {
         return null;
-    }
-
-    @Override
-    public void saveMovieOnCache(Filme movie) {
-
     }
 }

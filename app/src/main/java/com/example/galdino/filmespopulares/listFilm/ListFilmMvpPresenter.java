@@ -8,7 +8,7 @@ import com.example.galdino.filmespopulares.mvp.MvpPresenter;
 
 public interface ListFilmMvpPresenter extends MvpPresenter<ListFilmMvpView>
 {
-    void getPopularMovies();
+    void getFilmesPopulares();
 
-    void getTopRatedMovies();
+    void getFilmesMelhorAvaliados();
 }

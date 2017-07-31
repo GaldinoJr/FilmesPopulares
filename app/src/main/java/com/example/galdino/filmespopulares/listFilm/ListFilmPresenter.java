@@ -25,36 +25,42 @@ public class ListFilmPresenter extends BasePresenter<ListFilmMvpView> implements
     }
 
     @Override
-    public void getPopularMovies() {
+    public void getFilmesPopulares() {
         SchedulerProvider schedulerProvider = getSchedulerProvider();
-        mFilmeMvpDataManager.getPopularMovies()
+        mFilmeMvpDataManager.getFilmesPopulares()
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .subscribe(getFilmesObserver());
     }
 
     @Override
-    public void getTopRatedMovies() {
-
+    public void getFilmesMelhorAvaliados() {
+        SchedulerProvider schedulerProvider = getSchedulerProvider();
+        mFilmeMvpDataManager.getFilmesMelhorAvaliados()
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .subscribe(getFilmesObserver());
     }
 
     private SingleObserver<List<Result>> getFilmesObserver() {
         return new SingleObserver<List<Result>>() {
             @Override
-            public void onSubscribe(@NonNull Disposable d) {
-                mMvpView.onGettingMovies(true);
+            public void onSubscribe(@NonNull Disposable d)
+            {
+                mMvpView.onBuscandoFilmes(true);
             }
 
             @Override
-            public void onSuccess(@NonNull List<Result> movies) {
-                mMvpView.onMoviesReady(movies);
-                mMvpView.onGettingMovies(false);
+            public void onSuccess(@NonNull List<Result> movies)
+            {
+                mMvpView.onFilmesPreparados(movies);
+                mMvpView.onBuscandoFilmes(false);
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                mMvpView.onGetMoviesFailed();
-                mMvpView.onGettingMovies(false);
+                mMvpView.onFalhaBuscandoFilmes();
+                mMvpView.onBuscandoFilmes(false);
             }
         };
     }
@@ -71,16 +77,16 @@ public class ListFilmPresenter extends BasePresenter<ListFilmMvpView> implements
     private ListFilmMvpView getEmptyView() {
         return new ListFilmMvpView() {
             @Override
-            public void onMoviesReady(List<Result> movies) {
+            public void onFilmesPreparados(List<Result> movies) {
             }
             @Override
-            public void onGetMoviesFailed() {
+            public void onFalhaBuscandoFilmes() {
             }
             @Override
-            public void onGettingMovies(boolean isGetting) {
+            public void onBuscandoFilmes(boolean isGetting) {
             }
             @Override
-            public void onGetMovies() {
+            public void onGetFilmes() {
             }
         };
     }
