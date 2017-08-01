@@ -30,7 +30,9 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     private static final String URL_API = "https://api.themoviedb.org/3/movie/";
     private static final String PARAMETER_CHAVE_API = "api_key";
 
-    private static final String MOVIE_ID_PATH = "movieId";
+    private static final String FILME_DETALHE_PATH_FILME_ID = "movieId";
+    private static final String FILME_DETALHE_PATH = "{" + FILME_DETALHE_PATH_FILME_ID + "}";
+
     //private static final String GET_MOVIE_PATH = "3/movie/{" + MOVIE_ID_PATH + "}";
 
     private final MovieDbApi mMovieDbApi;
@@ -58,7 +60,7 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     }
 
     @Override
-    public Observable<FilmeDetalhe> getFilmeDetalhe(String movieId) {
+    public Observable<FilmeDetalhe> getFilmeDetalhe(int movieId) {
         return mMovieDbApi.getFilmeDetalhe(movieId, mApiKey)
                 .cast(FilmeDetalhe.class);
     }
@@ -98,8 +100,8 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
         @GET(METODO_MELHOR_AVALIADO)
         Observable<Filme> getMelhorAvaliado(@Query(PARAMETER_CHAVE_API) String apiKey);
 
-        @GET(MOVIE_ID_PATH)
-        Observable<FilmeDetalhe> getFilmeDetalhe(@Path(MOVIE_ID_PATH) String movieId,
+        @GET(FILME_DETALHE_PATH)
+        Observable<FilmeDetalhe> getFilmeDetalhe(@Path(FILME_DETALHE_PATH_FILME_ID) int movieId,
                                                  @Query(PARAMETER_CHAVE_API) String apiKey);
     }
 }

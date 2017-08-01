@@ -18,7 +18,7 @@ public class FilmeDetalheModel implements FilmeDetalheMvpModel
     }
 
     @Override
-    public Single<FilmeDetalhe> getFilmeDetalhe(String idFilme) {
+    public Single<FilmeDetalhe> getFilmeDetalhe(int idFilme) {
         return mvpHelper.getFilmeDetalhe(idFilme).singleOrError();
     }
 }

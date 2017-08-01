@@ -10,10 +10,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.galdino.filmespopulares.R;
-import com.example.galdino.filmespopulares.databinding.ActivityFilmesListBinding;
+import com.example.galdino.filmespopulares.databinding.ListFilmesActivityBinding;
 
 public class ListFilmesActivity extends AppCompatActivity {
-    private ActivityFilmesListBinding mBinding;
+    private ListFilmesActivityBinding mBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

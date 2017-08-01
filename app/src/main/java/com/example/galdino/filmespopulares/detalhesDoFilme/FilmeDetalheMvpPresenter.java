@@ -7,5 +7,5 @@ import com.example.galdino.filmespopulares.mvp.MvpPresenter;
  */
 
 public interface FilmeDetalheMvpPresenter extends MvpPresenter<FilmeDetalheMvpView>{
-    void getFilmeDetalhe(String idFilme);
+    void getFilmeDetalhe(int idFilme);
 }

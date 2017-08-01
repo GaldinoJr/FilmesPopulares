@@ -11,5 +11,5 @@ import io.reactivex.Single;
 
 public interface FilmeDetalheMvpModel
 {
-    Single<FilmeDetalhe> getFilmeDetalhe(String idFilme);
+    Single<FilmeDetalhe> getFilmeDetalhe(int idFilme);
 }

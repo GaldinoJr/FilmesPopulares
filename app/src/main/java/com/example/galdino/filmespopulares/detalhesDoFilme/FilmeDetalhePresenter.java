@@ -36,7 +36,7 @@ public class FilmeDetalhePresenter extends BasePresenter<FilmeDetalheMvpView> im
     }
 
     @Override
-    public void getFilmeDetalhe(String idFilme) {
+    public void getFilmeDetalhe(int idFilme) {
         SchedulerProvider schedulerProvider = getSchedulerProvider();
         mMvpModel.getFilmeDetalhe(idFilme)
                 .subscribeOn(schedulerProvider.io())
@@ -67,7 +67,7 @@ public class FilmeDetalhePresenter extends BasePresenter<FilmeDetalheMvpView> im
         return new FilmeDetalheMvpView() {
 
             @Override
-            public void onFilmeDetalheBuscarInformacoes(String idFilme) {
+            public void onFilmeDetalheBuscarInformacoes(int idFilme) {
 
             }
 

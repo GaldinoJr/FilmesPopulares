@@ -1,6 +1,7 @@
 package com.example.galdino.filmespopulares.mvp.di.modules;
 
 import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheMvpModel;
+import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheMvpPresenter;
 import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalhePresenter;
 import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmMvpModel;
 import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmMvpPresenter;
@@ -25,7 +26,7 @@ public class PresenterModule {
     }
 
     @Provides
-    public FilmeDetalhePresenter providesFilmeDetalhePresenter(SchedulerProvider schedulerProvider, FilmeDetalheMvpModel mMvpModel) {
+    public FilmeDetalheMvpPresenter providesFilmeDetalhePresenter(SchedulerProvider schedulerProvider, FilmeDetalheMvpModel mMvpModel) {
         return new FilmeDetalhePresenter(schedulerProvider,mMvpModel);
     }
 

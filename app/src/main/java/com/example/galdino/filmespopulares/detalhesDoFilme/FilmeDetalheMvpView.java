@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface FilmeDetalheMvpView extends MvpView
 {
-    void onFilmeDetalheBuscarInformacoes(String idFilme);
+    void onFilmeDetalheBuscarInformacoes(int idFilme);
     void onFilmeDetalheFalhaAoBuscarInformacoes();
     void onFilmeDetalhePreparado(FilmeDetalhe filmeDetalhe);
 }

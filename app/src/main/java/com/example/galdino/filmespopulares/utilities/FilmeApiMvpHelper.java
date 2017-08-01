@@ -18,7 +18,7 @@ public interface FilmeApiMvpHelper
 
     Observable<List<Result>> getMelhorAvaliado();
 
-    Observable<FilmeDetalhe> getFilmeDetalhe(String movieId);
+    Observable<FilmeDetalhe> getFilmeDetalhe(int movieId);
 
     Observable<Filme> getMovieSummary(String movieId);
 }
