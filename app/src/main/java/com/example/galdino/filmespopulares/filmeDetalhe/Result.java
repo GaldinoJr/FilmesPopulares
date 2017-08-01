@@ -1,5 +1,5 @@
 
-package com.example.galdino.filmespopulares.videoDetalhe;
+package com.example.galdino.filmespopulares.filmeDetalhe;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -7,7 +7,7 @@ import android.util.Log;
 import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.R;
-import com.example.galdino.filmespopulares.videoDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.filmeDetalhe.FilmeDetalhe;
 import com.google.gson.Gson;
 
 import java.io.IOException;

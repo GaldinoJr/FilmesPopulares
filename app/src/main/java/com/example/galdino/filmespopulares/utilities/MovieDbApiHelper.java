@@ -5,7 +5,7 @@ import android.content.Context;
 import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.R;
-import com.example.galdino.filmespopulares.videoDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.filmeDetalhe.FilmeDetalhe;
 
 import java.util.List;
 
@@ -58,8 +58,9 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     }
 
     @Override
-    public Observable<Filme> getMovie(String movieId) {
-        return null;
+    public Observable<FilmeDetalhe> getFilmeDetalhe(String movieId) {
+        return mMovieDbApi.getFilmeDetalhe(movieId, mApiKey)
+                .cast(FilmeDetalhe.class);
     }
 
     @Override
@@ -98,7 +99,7 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
         Observable<Filme> getMelhorAvaliado(@Query(PARAMETER_CHAVE_API) String apiKey);
 
         @GET(MOVIE_ID_PATH)
-        Observable<FilmeDetalhe> getMovie(@Path(MOVIE_ID_PATH) String movieId,
-                                          @Query(PARAMETER_CHAVE_API) String apiKey);
+        Observable<FilmeDetalhe> getFilmeDetalhe(@Path(MOVIE_ID_PATH) String movieId,
+                                                 @Query(PARAMETER_CHAVE_API) String apiKey);
     }
 }

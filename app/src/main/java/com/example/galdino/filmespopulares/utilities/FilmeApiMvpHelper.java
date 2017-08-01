@@ -2,6 +2,7 @@ package com.example.galdino.filmespopulares.utilities;
 
 import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.dominio.Result;
+import com.example.galdino.filmespopulares.filmeDetalhe.FilmeDetalhe;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface FilmeApiMvpHelper
 
     Observable<List<Result>> getMelhorAvaliado();
 
-    Observable<Filme> getMovie(String movieId);
+    Observable<FilmeDetalhe> getFilmeDetalhe(String movieId);
 
     Observable<Filme> getMovieSummary(String movieId);
 }

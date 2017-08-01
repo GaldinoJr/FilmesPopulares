@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.listFilm;
+package com.example.galdino.filmespopulares.listaDeFilmes;
 
 import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.mvp.BasePresenter;
@@ -21,7 +21,7 @@ public class ListFilmPresenter extends BasePresenter<ListFilmMvpView> implements
 
     public ListFilmPresenter(SchedulerProvider schedulerProvider, ListFilmMvpModel dataManager) {
         super(schedulerProvider);
-        mFilmeMvpDataManager = dataManager;
+        this.mFilmeMvpDataManager = dataManager;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class ListFilmPresenter extends BasePresenter<ListFilmMvpView> implements
             public void onBuscandoFilmes(boolean isGetting) {
             }
             @Override
-            public void onGetFilmes() {
+            public void onBuscarFilmes() {
             }
         };
     }

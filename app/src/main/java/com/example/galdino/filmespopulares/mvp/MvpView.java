@@ -5,4 +5,5 @@ package com.example.galdino.filmespopulares.mvp;
  */
 
 public interface MvpView {
+
 }

@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.listFilm;
+package com.example.galdino.filmespopulares.listaDeFilmes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.adapter.AdapterListFilmes;
+import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheActivity;
 import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.UI.activits.ActivityFilmesDetalhe;
 import com.example.galdino.filmespopulares.databinding.FragmentFragListFilmBinding;
@@ -91,7 +94,7 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
 
     @Override
     public void onFalhaBuscandoFilmes() {
-
+        Toast.makeText(getContext(),getString(R.string.erro_buscar_filmes),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -100,7 +103,7 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
     }
 
     @Override
-    public void onGetFilmes()
+    public void onBuscarFilmes()
     {
         mBinding.pbLoading.setVisibility(View.VISIBLE);
         if(mTipoPesquisa == DF_FILMES_POPULARES) {
@@ -114,7 +117,7 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
 
     @Override
     public void onRefresh() {
-        onGetFilmes();
+        onBuscarFilmes();
     }
 
     private AdapterListFilmes.ListenerAdapter mListener = new AdapterListFilmes.ListenerAdapter() {
@@ -123,8 +126,8 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
         {
             Intent intent = new Intent();
             if(result.getId() != null)
-                intent.putExtra(ActivityFilmesDetalhe.KEY_ID,result.getId());
-            chamarProximaTela(ActivityFilmesDetalhe.class, intent);
+                intent.putExtra(FilmeDetalheActivity.EXTRA_ID_FILME,result.getId());
+            chamarProximaTela(FilmeDetalheActivity.class, intent);
         }
     };
     private void chamarProximaTela(Class classe, Intent intent) {

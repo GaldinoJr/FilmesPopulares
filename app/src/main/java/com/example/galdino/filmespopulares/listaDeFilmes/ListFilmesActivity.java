@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.listFilm;
+package com.example.galdino.filmespopulares.listaDeFilmes;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -12,14 +12,14 @@ import android.view.MenuItem;
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.databinding.ActivityFilmesListBinding;
 
-public class ActivityFilmesList extends AppCompatActivity {
+public class ListFilmesActivity extends AppCompatActivity {
     private ActivityFilmesListBinding mBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filmes_list);
+        setContentView(R.layout.list_filmes_activity);
 
-        mBinding = DataBindingUtil.setContentView(this,R.layout.activity_filmes_list);
+        mBinding = DataBindingUtil.setContentView(this,R.layout.list_filmes_activity);
         if (mBinding != null) {
             Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
             setSupportActionBar(toolbar);

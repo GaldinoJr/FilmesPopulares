@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.utilities.NetworkUtils;
-import com.example.galdino.filmespopulares.videoDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.filmeDetalhe.FilmeDetalhe;
 import com.example.galdino.filmespopulares.databinding.ActivityFilmesDetalheBinding;
 import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
 import com.squareup.picasso.Picasso;

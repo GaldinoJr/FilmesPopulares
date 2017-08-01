@@ -2,9 +2,11 @@ package com.example.galdino.filmespopulares.mvp.di.modules;
 
 import android.content.Context;
 
+import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheModel;
+import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheMvpModel;
+import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmModel;
+import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmMvpModel;
 import com.example.galdino.filmespopulares.utilities.FilmeApiMvpHelper;
-import com.example.galdino.filmespopulares.listFilm.ListFilmModel;
-import com.example.galdino.filmespopulares.listFilm.ListFilmMvpModel;
 import com.example.galdino.filmespopulares.utilities.MovieDbApiHelper;
 
 import dagger.Module;
@@ -40,5 +42,11 @@ public class ModelModule {
     public ListFilmMvpModel providesListFilmMvpModel(FilmeApiMvpHelper mHelper)
     {
         return new ListFilmModel(mHelper);
+    }
+
+    @Provides
+    public FilmeDetalheMvpModel providesFilmeDetalheMvpModel(FilmeApiMvpHelper mHelper)
+    {
+        return new FilmeDetalheModel(mHelper);
     }
 }
