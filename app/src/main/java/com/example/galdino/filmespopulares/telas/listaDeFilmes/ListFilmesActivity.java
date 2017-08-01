@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.listaDeFilmes;
+package com.example.galdino.filmespopulares.telas.listaDeFilmes;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;

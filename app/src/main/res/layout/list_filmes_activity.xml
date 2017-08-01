@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/ic_background"
-        tools:context="com.example.galdino.filmespopulares.listaDeFilmes.ListFilmesActivity">
+        tools:context=".telas.listaDeFilmes.ListFilmesActivity">
 
         <ImageView
             android:layout_width="30dp"

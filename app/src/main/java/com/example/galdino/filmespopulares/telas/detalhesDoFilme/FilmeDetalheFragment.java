@@ -1,11 +1,9 @@
-package com.example.galdino.filmespopulares.detalhesDoFilme;
+package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +12,13 @@ import android.widget.Toast;
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.databinding.FragmentFilmeDetalheBinding;
 import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
-import com.example.galdino.filmespopulares.filmeDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
 import com.example.galdino.filmespopulares.mvp.di.AppComponent;
 import com.example.galdino.filmespopulares.mvp.di.DaggerAppComponent;
 import com.example.galdino.filmespopulares.mvp.di.modules.ModelModule;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
-
-import static com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheActivity.EXTRA_ID_FILME;
 
 public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpView{
     private FragmentFilmeDetalheBinding mBinding;

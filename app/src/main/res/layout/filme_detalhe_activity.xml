@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/ic_background"
-        tools:context="com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheActivity">
+        tools:context=".telas.detalhesDoFilme.FilmeDetalheActivity">
 
         <include
             android:id="@+id/tool_bar"
@@ -27,7 +27,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <fragment
-                android:name="com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheFragment"
+                android:name="com.example.galdino.filmespopulares.telas.detalhesDoFilme.FilmeDetalheFragment"
                 android:id="@+id/frag_container_detalhe"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -1,8 +1,6 @@
-package com.example.galdino.filmespopulares.detalhesDoFilme;
+package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
-import com.example.galdino.filmespopulares.filmeDetalhe.FilmeDetalhe;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmMvpPresenter;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmMvpView;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
 import com.example.galdino.filmespopulares.mvp.BasePresenter;
 import com.example.galdino.filmespopulares.mvp.schedulerprovider.SchedulerProvider;
 

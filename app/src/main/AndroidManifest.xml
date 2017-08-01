@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".listaDeFilmes.ListFilmesActivity"
+            android:name=".telas.listaDeFilmes.ListFilmesActivity"
             android:label="@string/activity_name_filmes"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -22,10 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UI.activits.ActivityFilmesDetalhe"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".detalhesDoFilme.FilmeDetalheActivity"
+            android:name=".telas.detalhesDoFilme.FilmeDetalheActivity"
             android:label="@string/title_activity_filme_detalhe"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

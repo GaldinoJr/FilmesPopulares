@@ -5,7 +5,7 @@ import android.content.Context;
 import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.R;
-import com.example.galdino.filmespopulares.filmeDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
 
 import java.util.List;
 

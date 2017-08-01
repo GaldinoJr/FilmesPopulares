@@ -1,10 +1,10 @@
 package com.example.galdino.filmespopulares;
 
 import com.example.galdino.filmespopulares.dominio.Result;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmMvpModel;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmMvpPresenter;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmMvpView;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmPresenter;
+import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmMvpModel;
+import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmMvpPresenter;
+import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmMvpView;
+import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmPresenter;
 import com.example.galdino.filmespopulares.mvp.schedulerprovider.SchedulerProvider;
 
 import org.junit.Before;

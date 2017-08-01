@@ -1,11 +1,11 @@
 package com.example.galdino.filmespopulares.mvp.di.modules;
 
-import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheMvpModel;
-import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheMvpPresenter;
-import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalhePresenter;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmMvpModel;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmMvpPresenter;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmPresenter;
+import com.example.galdino.filmespopulares.telas.detalhesDoFilme.FilmeDetalheMvpModel;
+import com.example.galdino.filmespopulares.telas.detalhesDoFilme.FilmeDetalheMvpPresenter;
+import com.example.galdino.filmespopulares.telas.detalhesDoFilme.FilmeDetalhePresenter;
+import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmMvpModel;
+import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmMvpPresenter;
+import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmPresenter;
 import com.example.galdino.filmespopulares.mvp.schedulerprovider.SchedulerProvider;
 import com.example.galdino.filmespopulares.mvp.schedulerprovider.AppSchedulerProvider;
 

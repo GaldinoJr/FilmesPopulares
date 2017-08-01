@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.listaDeFilmes;
+package com.example.galdino.filmespopulares.telas.listaDeFilmes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +12,8 @@ import android.widget.Toast;
 
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.adapter.AdapterListFilmes;
-import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheActivity;
+import com.example.galdino.filmespopulares.telas.detalhesDoFilme.FilmeDetalheActivity;
 import com.example.galdino.filmespopulares.dominio.Result;
-import com.example.galdino.filmespopulares.UI.activits.ActivityFilmesDetalhe;
 import com.example.galdino.filmespopulares.databinding.FragmentFragListFilmBinding;
 import com.example.galdino.filmespopulares.mvp.di.AppComponent;
 import com.example.galdino.filmespopulares.mvp.di.DaggerAppComponent;

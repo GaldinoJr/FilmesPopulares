@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.detalhesDoFilme;
+package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
 import com.example.galdino.filmespopulares.mvp.MvpPresenter;
 

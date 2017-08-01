@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheFragment">
+        tools:context=".telas.detalhesDoFilme.FilmeDetalheFragment">
 
         <include
             android:id="@+id/incl_capa_filme"

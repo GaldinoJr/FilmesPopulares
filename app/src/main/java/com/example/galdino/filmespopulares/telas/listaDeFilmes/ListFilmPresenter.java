@@ -1,4 +1,4 @@
-package com.example.galdino.filmespopulares.listaDeFilmes;
+package com.example.galdino.filmespopulares.telas.listaDeFilmes;
 
 import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.mvp.BasePresenter;

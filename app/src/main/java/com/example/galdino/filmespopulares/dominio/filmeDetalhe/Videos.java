@@ -1,5 +1,5 @@
 
-package com.example.galdino.filmespopulares.filmeDetalhe;
+package com.example.galdino.filmespopulares.dominio.filmeDetalhe;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

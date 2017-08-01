@@ -2,10 +2,10 @@ package com.example.galdino.filmespopulares.mvp.di.modules;
 
 import android.content.Context;
 
-import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheModel;
-import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheMvpModel;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmModel;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmMvpModel;
+import com.example.galdino.filmespopulares.telas.detalhesDoFilme.FilmeDetalheModel;
+import com.example.galdino.filmespopulares.telas.detalhesDoFilme.FilmeDetalheMvpModel;
+import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmModel;
+import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmMvpModel;
 import com.example.galdino.filmespopulares.utilities.FilmeApiMvpHelper;
 import com.example.galdino.filmespopulares.utilities.MovieDbApiHelper;
 

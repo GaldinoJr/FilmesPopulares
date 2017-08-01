@@ -1,7 +1,7 @@
 package com.example.galdino.filmespopulares.mvp.di;
 
-import com.example.galdino.filmespopulares.detalhesDoFilme.FilmeDetalheFragment;
-import com.example.galdino.filmespopulares.listaDeFilmes.ListFilmFragment;
+import com.example.galdino.filmespopulares.telas.detalhesDoFilme.FilmeDetalheFragment;
+import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmFragment;
 import com.example.galdino.filmespopulares.mvp.di.modules.ModelModule;
 import com.example.galdino.filmespopulares.mvp.di.modules.PresenterModule;
 
