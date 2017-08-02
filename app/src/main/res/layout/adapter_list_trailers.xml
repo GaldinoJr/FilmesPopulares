@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/c_azul_claro">
+
+        <ImageView
+            android:id="@+id/iv_play"
+            android:layout_width="@dimen/iv_size_play"
+            android:layout_height="@dimen/iv_size_play"
+            android:layout_margin="@dimen/margem_media"
+            android:background="@drawable/circle_blue"
+            android:paddingLeft="3dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_play_only"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_nome_trailer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margem_padrao"
+            android:layout_marginLeft="@dimen/margem_media"
+            android:layout_marginRight="@dimen/margem_padrao"
+            android:layout_marginStart="@dimen/margem_media"
+            android:maxLines="2"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tv_size_nome_trailer"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_play"
+            app:layout_constraintLeft_toRightOf="@+id/iv_play"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_play"
+            tools:text="Official Trailer 3 Trailer 3 Trailer 3 Trailer 3" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margem_media"
+            android:background="@color/c_icon_azul"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_play" />
+
+        <TextView
+            android:id="@+id/tv_tipo_trailer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margem_padrao"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="Trailer" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

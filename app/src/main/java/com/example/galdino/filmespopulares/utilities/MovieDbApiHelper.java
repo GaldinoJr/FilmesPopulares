@@ -28,7 +28,9 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     private static final String METODO_POPULAR = "popular";
     private static final String METODO_MELHOR_AVALIADO = "top_rated";
     private static final String URL_API = "https://api.themoviedb.org/3/movie/";
-    private static final String PARAMETER_CHAVE_API = "api_key";
+    private static final String PARAMETER_FILME_DETALHE_CHAVE_API = "api_key";
+    private static final String PARAMETER_FILME_DETALHE_TRAILERS = "append_to_response";
+    private static final String VALUE_PARAMETER_FILME_DETALHE_TRAILERS = "videos";
 
     private static final String FILME_DETALHE_PATH_FILME_ID = "movieId";
     private static final String FILME_DETALHE_PATH = "{" + FILME_DETALHE_PATH_FILME_ID + "}";
@@ -61,7 +63,7 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
 
     @Override
     public Observable<FilmeDetalhe> getFilmeDetalhe(int movieId) {
-        return mMovieDbApi.getFilmeDetalhe(movieId, mApiKey)
+        return mMovieDbApi.getFilmeDetalhe(movieId, mApiKey,VALUE_PARAMETER_FILME_DETALHE_TRAILERS)
                 .cast(FilmeDetalhe.class);
     }
 
@@ -95,13 +97,14 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     interface MovieDbApi {
 
         @GET(METODO_POPULAR)
-        Observable<Filme> getPopular(@Query(PARAMETER_CHAVE_API) String apiKey);
+        Observable<Filme> getPopular(@Query(PARAMETER_FILME_DETALHE_CHAVE_API) String apiKey);
 
         @GET(METODO_MELHOR_AVALIADO)
-        Observable<Filme> getMelhorAvaliado(@Query(PARAMETER_CHAVE_API) String apiKey);
+        Observable<Filme> getMelhorAvaliado(@Query(PARAMETER_FILME_DETALHE_CHAVE_API) String apiKey);
 
         @GET(FILME_DETALHE_PATH)
         Observable<FilmeDetalhe> getFilmeDetalhe(@Path(FILME_DETALHE_PATH_FILME_ID) int movieId,
-                                                 @Query(PARAMETER_CHAVE_API) String apiKey);
+                                                 @Query(PARAMETER_FILME_DETALHE_CHAVE_API) String apiKey,
+                                                 @Query(PARAMETER_FILME_DETALHE_TRAILERS) String trailer);
     }
 }

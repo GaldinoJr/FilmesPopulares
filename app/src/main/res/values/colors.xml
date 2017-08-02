@@ -10,4 +10,6 @@
     <color name="c_preto_claro">#4F4F4F</color>
     <color name="c_icon_azul">#6FA8E0</color>
     <color name="c_letra_azul">#B6E7FC</color>
+    <color name="c_azul_claro">#7BC3F2</color>
+    <color name="c_azul_escuro">#3F4D9E</color>
 </resources>

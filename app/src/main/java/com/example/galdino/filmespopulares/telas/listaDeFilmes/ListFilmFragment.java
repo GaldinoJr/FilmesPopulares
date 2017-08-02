@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.adapter.AdapterListFilmes;
+
+import com.example.galdino.filmespopulares.databinding.FragmentListFilmBinding;
 import com.example.galdino.filmespopulares.telas.detalhesDoFilme.FilmeDetalheActivity;
 import com.example.galdino.filmespopulares.dominio.Result;
-import com.example.galdino.filmespopulares.databinding.FragmentFragListFilmBinding;
+
 import com.example.galdino.filmespopulares.mvp.di.AppComponent;
 import com.example.galdino.filmespopulares.mvp.di.DaggerAppComponent;
 import com.example.galdino.filmespopulares.mvp.di.modules.ModelModule;
@@ -28,7 +30,7 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
     public static final String EXTRA_TIPO_PESQUISA = "EXTRA_TIPO_PESQUISA";
     public static final int DF_FILMES_POPULARES = 1001;
     public static final int DF_FILMES_MELHOR_AVALIADO = 1002;
-    private FragmentFragListFilmBinding mBinding;
+    private FragmentListFilmBinding mBinding;
     private ListFilmMvpPresenter listFilmPresenter;
     private int mTipoPesquisa;
 
@@ -52,7 +54,7 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mBinding = FragmentFragListFilmBinding.inflate(inflater, container, false);
+        mBinding = FragmentListFilmBinding.inflate(inflater, container, false);
 
         mBinding.rvFilmes.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);

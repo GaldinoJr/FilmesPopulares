@@ -1,8 +1,10 @@
 package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,9 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.galdino.filmespopulares.R;
+import com.example.galdino.filmespopulares.adapter.AdapterListFilmes;
+import com.example.galdino.filmespopulares.adapter.AdapterListTrailers;
 import com.example.galdino.filmespopulares.databinding.FragmentFilmeDetalheBinding;
 import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
 import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Result;
 import com.example.galdino.filmespopulares.mvp.di.AppComponent;
 import com.example.galdino.filmespopulares.mvp.di.DaggerAppComponent;
 import com.example.galdino.filmespopulares.mvp.di.modules.ModelModule;
@@ -25,6 +30,13 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     private FilmeDetalheMvpPresenter mPresenter;
     private Integer mIdFilme;
     private FilmeDetalhe mFilmeDetalhe;
+
+    private AdapterListTrailers.ListenerAdapter mListener = new AdapterListTrailers.ListenerAdapter() {
+        @Override
+        public void onItenClickListener(Result result) {
+            Toast.makeText(getContext().getApplicationContext(),"teste",Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,6 +79,7 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     @Override
     public void onFilmeDetalheFalhaAoBuscarInformacoes() {
         Toast.makeText(getContext(),getString(R.string.erro_buscar_detalhe_filme),Toast.LENGTH_SHORT).show();
+        mBinding.pbLoading.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -96,6 +109,19 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
                 mBinding.tvNotaFilme.setText(nota);
             }
             mBinding.tvDescricaoFilme.setText(filmeDetalhe.getOverview());
+
+            if(filmeDetalhe.getVideos() != null)
+            {
+                AdapterListTrailers adapterListTrailers = new AdapterListTrailers(filmeDetalhe.getVideos().getResults());
+                if(mListener != null) {
+                    adapterListTrailers.setListener(mListener);
+                }
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext().getApplicationContext());
+
+                mBinding.rvTrailers.setAdapter(adapterListTrailers);
+                mBinding.rvTrailers.setLayoutManager(linearLayoutManager);
+                mBinding.rvTrailers.setNestedScrollingEnabled(false);
+            }
         }
         mBinding.pbLoading.setVisibility(View.INVISIBLE);
     }
