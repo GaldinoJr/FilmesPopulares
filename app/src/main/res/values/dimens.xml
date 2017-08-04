@@ -5,6 +5,7 @@
     <dimen name="margem_grande">35dp</dimen>
     <dimen name="tv_size_subtitulo">30sp</dimen>
     <dimen name="tv_size_texto">16sp</dimen>
+    <dimen name="tv_size_texto_grande">25sp</dimen>
     <dimen name="margem_media">20dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="iv_size_play">50dp</dimen>

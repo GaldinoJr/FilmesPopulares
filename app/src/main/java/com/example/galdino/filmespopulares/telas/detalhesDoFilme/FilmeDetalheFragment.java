@@ -16,6 +16,7 @@ import com.example.galdino.filmespopulares.adapter.AdapterListFilmes;
 import com.example.galdino.filmespopulares.adapter.AdapterListTrailers;
 import com.example.galdino.filmespopulares.databinding.FragmentFilmeDetalheBinding;
 import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
+import com.example.galdino.filmespopulares.dominio.AnimationControler;
 import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
 import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Result;
 import com.example.galdino.filmespopulares.mvp.di.AppComponent;
@@ -25,7 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
-public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpView{
+public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpView, View.OnClickListener {
     private FragmentFilmeDetalheBinding mBinding;
     private FilmeDetalheMvpPresenter mPresenter;
     private Integer mIdFilme;
@@ -86,6 +87,9 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     public void onFilmeDetalhePreparado(FilmeDetalhe filmeDetalhe) {
         if(filmeDetalhe != null && mBinding != null)
         {
+            mBinding.labelTrailer.setOnClickListener(this);
+            mBinding.includeListTrailers.tvFecharListaTrailers.setOnClickListener(this);
+
             mFilmeDetalhe = filmeDetalhe;
             mBinding.inclCapaFilme.getRoot().setVisibility(View.VISIBLE);
             String urlCapa = getResources().getString(R.string.url_images_500) + filmeDetalhe.getPosterPath();
@@ -118,9 +122,9 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
                 }
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext().getApplicationContext());
 
-                mBinding.rvTrailers.setAdapter(adapterListTrailers);
-                mBinding.rvTrailers.setLayoutManager(linearLayoutManager);
-                mBinding.rvTrailers.setNestedScrollingEnabled(false);
+                mBinding.includeListTrailers.rvTrailers.setAdapter(adapterListTrailers);
+                mBinding.includeListTrailers.rvTrailers.setLayoutManager(linearLayoutManager);
+                mBinding.includeListTrailers.rvTrailers.setNestedScrollingEnabled(false);
             }
         }
         mBinding.pbLoading.setVisibility(View.INVISIBLE);
@@ -146,5 +150,20 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
             getActivity().finish();
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mBinding.labelTrailer)
+        {
+//            AnimationControler.translateShow(mBinding.ivSombra,getContext().getApplicationContext());
+            AnimationControler.upShowView(mBinding.includeListTrailers.constraintTrailer,getContext().getApplicationContext());
+            mBinding.includeListTrailers.tvFecharListaTrailers.setFocusable(true);
+        }
+        else if(v == mBinding.includeListTrailers.tvFecharListaTrailers)
+        {
+//            AnimationControler.translateHide(mBinding.ivSombra,getContext().getApplicationContext());
+            AnimationControler.downHideView(mBinding.includeListTrailers.constraintTrailer,getContext().getApplicationContext());
+        }
     }
 }

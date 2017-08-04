@@ -24,7 +24,7 @@
         <activity
             android:name=".telas.detalhesDoFilme.FilmeDetalheActivity"
             android:label="@string/title_activity_filme_detalhe"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>
