@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/c_azul_claro">
+        android:background="@android:color/transparent">
 
         <ImageView
             android:id="@+id/iv_play"
@@ -29,7 +29,7 @@
             android:layout_marginRight="@dimen/margem_padrao"
             android:layout_marginStart="@dimen/margem_media"
             android:maxLines="2"
-            android:textColor="@android:color/white"
+            android:textColor="@color/c_azul_claro"
             android:textSize="@dimen/tv_size_nome_trailer"
             app:layout_constraintBottom_toBottomOf="@+id/iv_play"
             app:layout_constraintLeft_toRightOf="@+id/iv_play"
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margem_padrao"
-            android:textColor="@android:color/white"
+            android:textColor="@color/c_azul_claro"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintRight_toRightOf="parent"
             tools:text="Trailer" />

@@ -1,6 +1,7 @@
 package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -12,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.galdino.filmespopulares.R;
-import com.example.galdino.filmespopulares.adapter.AdapterListFilmes;
 import com.example.galdino.filmespopulares.adapter.AdapterListTrailers;
 import com.example.galdino.filmespopulares.databinding.FragmentFilmeDetalheBinding;
 import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
@@ -31,11 +31,16 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     private FilmeDetalheMvpPresenter mPresenter;
     private Integer mIdFilme;
     private FilmeDetalhe mFilmeDetalhe;
+    private boolean mFgListaTrailerAberta;
 
     private AdapterListTrailers.ListenerAdapter mListener = new AdapterListTrailers.ListenerAdapter() {
         @Override
         public void onItenClickListener(Result result) {
-            Toast.makeText(getContext().getApplicationContext(),"teste",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext().getApplicationContext(),"teste",Toast.LENGTH_SHORT).show();
+            String urlVideo = "vnd.youtube:"+result.getKey();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlVideo));
+            intent.putExtra("VIDEO_ID",result.getKey());
+            startActivity(intent);
         }
     };
 
@@ -44,6 +49,7 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = FragmentFilmeDetalheBinding.inflate(inflater,container, false);
+        mFgListaTrailerAberta = false;
         // Habilita o menu no fragment
         setHasOptionsMenu(true);
 
@@ -146,8 +152,16 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
                 mFilmeDetalhe.setFgFavorito(true);
             }
         }
-        else {
-            getActivity().finish();
+        else
+        {
+            if(mFgListaTrailerAberta)
+            {
+                fecharListaTrailer();
+            }
+            else
+            {
+                getActivity().finish();
+            }
         }
         return true;
     }
@@ -156,14 +170,26 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     public void onClick(View v) {
         if (v == mBinding.labelTrailer)
         {
+            mFgListaTrailerAberta = true;
 //            AnimationControler.translateShow(mBinding.ivSombra,getContext().getApplicationContext());
             AnimationControler.upShowView(mBinding.includeListTrailers.constraintTrailer,getContext().getApplicationContext());
             mBinding.includeListTrailers.tvFecharListaTrailers.setFocusable(true);
         }
         else if(v == mBinding.includeListTrailers.tvFecharListaTrailers)
         {
-//            AnimationControler.translateHide(mBinding.ivSombra,getContext().getApplicationContext());
-            AnimationControler.downHideView(mBinding.includeListTrailers.constraintTrailer,getContext().getApplicationContext());
+            fecharListaTrailer();
         }
+    }
+
+    public boolean listaTrailerAberta()
+    {
+        return mFgListaTrailerAberta;
+    }
+
+    public void fecharListaTrailer()
+    {
+        mFgListaTrailerAberta = false;
+//            AnimationControler.translateHide(mBinding.ivSombra,getContext().getApplicationContext());
+        AnimationControler.downHideView(mBinding.includeListTrailers.constraintTrailer,getContext().getApplicationContext());
     }
 }

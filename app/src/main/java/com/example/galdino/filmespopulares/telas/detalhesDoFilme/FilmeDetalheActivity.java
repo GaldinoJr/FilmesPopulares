@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.galdino.filmespopulares.R;
@@ -16,6 +17,8 @@ import com.example.galdino.filmespopulares.databinding.FilmeDetalheActivityBindi
 public class FilmeDetalheActivity extends AppCompatActivity {
     public static final String EXTRA_ID_FILME = "EXTRA_ID_FILME";
     private FilmeDetalheActivityBinding mBinding;
+    private FilmeDetalheFragment filmeDetalheFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +44,7 @@ public class FilmeDetalheActivity extends AppCompatActivity {
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FilmeDetalheFragment filmeDetalheFragment =
+        filmeDetalheFragment =
                 (FilmeDetalheFragment) fragmentManager.findFragmentById(R.id.frag_container_detalhe);
         filmeDetalheFragment.onFilmeDetalheBuscarInformacoes(idFilme);
     }
@@ -51,5 +54,17 @@ public class FilmeDetalheActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_activity_filmes_detalhe,menu);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(filmeDetalheFragment != null && filmeDetalheFragment.listaTrailerAberta())
+        {
+            filmeDetalheFragment.fecharListaTrailer();
+        }
+        else
+        {
+            finish();
+        }
     }
 }

@@ -7,6 +7,7 @@
         android:layout_height="match_parent"
         android:id="@+id/constraint_trailer"
         android:elevation="40dp"
+        android:background="@android:color/white"
         android:visibility="gone"
         >
 
@@ -17,8 +18,8 @@
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
             android:text="X"
-            android:textColor="@android:color/white"
-            android:background="@color/c_azul_claro"
+            android:textColor="@color/c_azul_claro"
+            android:background="@android:color/transparent"
             android:textAlignment="center"
             android:textSize="@dimen/tv_size_texto_grande"
             android:textStyle="bold"
