@@ -50,13 +50,6 @@ public class FilmeDetalheActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_activity_filmes_detalhe,menu);
-        return true;
-    }
-
-    @Override
     public void onBackPressed() {
         if(filmeDetalheFragment != null && filmeDetalheFragment.listaTrailerAberta())
         {

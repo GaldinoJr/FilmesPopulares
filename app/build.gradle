@@ -52,4 +52,8 @@ dependencies {
     //Ðagger2 Dependency Injection
     compile 'com.google.dagger:dagger:' + project.ext.daggerVersion
     annotationProcessor "com.google.dagger:dagger-compiler:" + project.ext.daggerVersion
+
+    // Room
+    compile 'android.arch.persistence.room:runtime:' + project.archRoomVersion;
+    annotationProcessor 'android.arch.persistence.room:compiler:' + project.archRoomVersion;
 }

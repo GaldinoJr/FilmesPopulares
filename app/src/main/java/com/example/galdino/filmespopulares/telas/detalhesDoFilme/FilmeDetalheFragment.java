@@ -1,5 +1,6 @@
 package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
+import android.arch.persistence.room.Database;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +17,13 @@ import android.widget.Toast;
 
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.adapter.AdapterListTrailers;
+import com.example.galdino.filmespopulares.dataBase.AppDataBase;
 import com.example.galdino.filmespopulares.databinding.FragmentFilmeDetalheBinding;
 import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
 import com.example.galdino.filmespopulares.dominio.AnimationControler;
 import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
 import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Result;
+import com.example.galdino.filmespopulares.entity.Filme;
 import com.example.galdino.filmespopulares.mvp.di.AppComponent;
 import com.example.galdino.filmespopulares.mvp.di.DaggerAppComponent;
 import com.example.galdino.filmespopulares.mvp.di.modules.ModelModule;
@@ -32,6 +37,9 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     private Integer mIdFilme;
     private FilmeDetalhe mFilmeDetalhe;
     private boolean mFgListaTrailerAberta;
+    private Filme filme;
+    private AppDataBase db;
+    private Menu menu;
 
     private AdapterListTrailers.ListenerAdapter mListener = new AdapterListTrailers.ListenerAdapter() {
         @Override
@@ -97,6 +105,8 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
             mBinding.includeListTrailers.tvFecharListaTrailers.setOnClickListener(this);
 
             mFilmeDetalhe = filmeDetalhe;
+            db = AppDataBase.getInstance(getContext().getApplicationContext());
+
             mBinding.inclCapaFilme.getRoot().setVisibility(View.VISIBLE);
             String urlCapa = getResources().getString(R.string.url_images_500) + filmeDetalhe.getPosterPath();
             IncludeCapaFilmeBinding includeCapaFilmeBinding = mBinding.inclCapaFilme;
@@ -132,6 +142,23 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
                 mBinding.includeListTrailers.rvTrailers.setLayoutManager(linearLayoutManager);
                 mBinding.includeListTrailers.rvTrailers.setNestedScrollingEnabled(false);
             }
+
+            filme = db.filmeDAO().selectById(mFilmeDetalhe.getId());
+            if(filme == null)
+            {
+                filme = new Filme();
+                filme.setId(mFilmeDetalhe.getId());
+                filme.setFgFavorito(0);
+                db.filmeDAO().InsertAll(filme);
+            }
+            else
+            {
+                if(filme.getFgFavorito() == 1)
+                {
+                    mFilmeDetalhe.setFgFavorito(false); // Passa false pra ficar true
+                    onOptionsItemSelected(menu.findItem(R.id.im_filmes_detalhe_favorito));
+                }
+            }
         }
         mBinding.pbLoading.setVisibility(View.INVISIBLE);
     }
@@ -145,12 +172,15 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
             {
                 item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(),R.drawable.ic_favorito_vazio_azul));
                 mFilmeDetalhe.setFgFavorito(false);
+                filme.setFgFavorito(0);
             }
             else
             {
                 item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(),R.drawable.ic_favorito_preenchido_azul));
                 mFilmeDetalhe.setFgFavorito(true);
+                filme.setFgFavorito(1);
             }
+            db.filmeDAO().updateFilme(filme);
         }
         else
         {
@@ -191,5 +221,12 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
         mFgListaTrailerAberta = false;
 //            AnimationControler.translateHide(mBinding.ivSombra,getContext().getApplicationContext());
         AnimationControler.downHideView(mBinding.includeListTrailers.constraintTrailer,getContext().getApplicationContext());
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
+        this.menu = menu;
+        MenuInflater menuInflater = getActivity().getMenuInflater();
+        menuInflater.inflate(R.menu.menu_activity_filmes_detalhe,menu);
     }
 }
