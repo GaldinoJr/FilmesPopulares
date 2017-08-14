@@ -1,6 +1,6 @@
 package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
-import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.mvp.BasePresenter;
 import com.example.galdino.filmespopulares.mvp.schedulerprovider.SchedulerProvider;
 
@@ -42,16 +42,16 @@ public class FilmeDetalhePresenter extends BasePresenter<FilmeDetalheMvpView> im
                 .subscribe(getFilmeObserver());
     }
 
-    private SingleObserver<FilmeDetalhe> getFilmeObserver() {
-        return new SingleObserver<FilmeDetalhe>() {
+    private SingleObserver<Filme> getFilmeObserver() {
+        return new SingleObserver<Filme>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onSuccess(@NonNull FilmeDetalhe filmeDetalhe) {
-                mMvpView.onFilmeDetalhePreparado(filmeDetalhe);
+            public void onSuccess(@NonNull Filme filme) {
+                mMvpView.onFilmeDetalhePreparado(filme);
             }
 
             @Override
@@ -75,7 +75,7 @@ public class FilmeDetalhePresenter extends BasePresenter<FilmeDetalheMvpView> im
             }
 
             @Override
-            public void onFilmeDetalhePreparado(FilmeDetalhe filmeDetalhe) {
+            public void onFilmeDetalhePreparado(Filme filme) {
 
             }
         };

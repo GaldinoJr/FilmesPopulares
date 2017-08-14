@@ -1,6 +1,6 @@
 package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
-import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.dominio.Filme;
 
 import io.reactivex.Single;
 
@@ -10,5 +10,5 @@ import io.reactivex.Single;
 
 public interface FilmeDetalheMvpModel
 {
-    Single<FilmeDetalhe> getFilmeDetalhe(int idFilme);
+    Single<Filme> getFilmeDetalhe(int idFilme);
 }

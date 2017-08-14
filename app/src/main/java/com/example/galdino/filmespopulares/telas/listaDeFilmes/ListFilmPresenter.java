@@ -1,6 +1,6 @@
 package com.example.galdino.filmespopulares.telas.listaDeFilmes;
 
-import com.example.galdino.filmespopulares.dominio.Result;
+import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.mvp.BasePresenter;
 import com.example.galdino.filmespopulares.mvp.schedulerprovider.SchedulerProvider;
 
@@ -42,8 +42,8 @@ public class ListFilmPresenter extends BasePresenter<ListFilmMvpView> implements
                 .subscribe(getFilmesObserver());
     }
 
-    private SingleObserver<List<Result>> getFilmesObserver() {
-        return new SingleObserver<List<Result>>() {
+    private SingleObserver<List<Filme>> getFilmesObserver() {
+        return new SingleObserver<List<Filme>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d)
             {
@@ -51,7 +51,7 @@ public class ListFilmPresenter extends BasePresenter<ListFilmMvpView> implements
             }
 
             @Override
-            public void onSuccess(@NonNull List<Result> movies)
+            public void onSuccess(@NonNull List<Filme> movies)
             {
                 mMvpView.onFilmesPreparados(movies);
                 mMvpView.onBuscandoFilmes(false);
@@ -77,7 +77,7 @@ public class ListFilmPresenter extends BasePresenter<ListFilmMvpView> implements
     private ListFilmMvpView getEmptyView() {
         return new ListFilmMvpView() {
             @Override
-            public void onFilmesPreparados(List<Result> movies) {
+            public void onFilmesPreparados(List<Filme> movies) {
             }
             @Override
             public void onFalhaBuscandoFilmes() {

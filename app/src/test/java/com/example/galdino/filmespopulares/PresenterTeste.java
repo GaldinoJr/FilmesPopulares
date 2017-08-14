@@ -1,6 +1,6 @@
 package com.example.galdino.filmespopulares;
 
-import com.example.galdino.filmespopulares.dominio.Result;
+import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmMvpModel;
 import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmMvpPresenter;
 import com.example.galdino.filmespopulares.telas.listaDeFilmes.ListFilmMvpView;
@@ -37,7 +37,7 @@ public class PresenterTeste
     @Mock
     private ListFilmMvpModel dataManager;
     @Mock
-    private List<Result> mResults;
+    private List<Filme> mResults;
 
     @Before
     public void setUp()
@@ -65,13 +65,13 @@ public class PresenterTeste
     @Test
     public void getPopular_modelError_false()
     {
-        when(dataManager.getFilmesPopulares()).thenReturn(Single.<List<Result>>error(new Exception("Mocked error")));
+        when(dataManager.getFilmesPopulares()).thenReturn(Single.<List<Filme>>error(new Exception("Mocked error")));
         mvpPresenter.getFilmesPopulares();
         mTestScheduler.triggerActions();
 
         verify(mvpView).onFalhaBuscandoFilmes();
 //        Nunca cahamnou uma lista com filmes
-        verify(mvpView, never()).onFilmesPreparados(anyListOf(Result.class));
+        verify(mvpView, never()).onFilmesPreparados(anyListOf(Filme.class));
         verify(mvpView).onBuscandoFilmes(false);
     }
 }

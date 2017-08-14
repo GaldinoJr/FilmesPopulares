@@ -1,6 +1,6 @@
 package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
-import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.mvp.MvpView;
 
 /**
@@ -11,5 +11,5 @@ public interface FilmeDetalheMvpView extends MvpView
 {
     void onFilmeDetalheBuscarInformacoes(int idFilme);
     void onFilmeDetalheFalhaAoBuscarInformacoes();
-    void onFilmeDetalhePreparado(FilmeDetalhe filmeDetalhe);
+    void onFilmeDetalhePreparado(Filme filme);
 }

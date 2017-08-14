@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.databinding.AdapterListFilmesBinding;
+import com.example.galdino.filmespopulares.dominio.Filme;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -18,11 +18,11 @@ import java.util.List;
  */
 
 public class AdapterListFilmes extends RecyclerView.Adapter<AdapterListFilmes.AdapteListFilmesViewHolder> {
-    private List<Result> mListFilmes;
+    private List<Filme> mListFilmes;
     private ListenerAdapter mListener;
 
 
-    public AdapterListFilmes(List<Result> mListFilmes) {
+    public AdapterListFilmes(List<Filme> mListFilmes) {
         this.mListFilmes = mListFilmes;
     }
 
@@ -39,7 +39,7 @@ public class AdapterListFilmes extends RecyclerView.Adapter<AdapterListFilmes.Ad
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (mListener != null && position != RecyclerView.NO_POSITION) {
-                        Result filme = mListFilmes.get(position);
+                        Filme filme = mListFilmes.get(position);
                         mListener.onClickList(filme);
                     }
                 }
@@ -87,6 +87,6 @@ public class AdapterListFilmes extends RecyclerView.Adapter<AdapterListFilmes.Ad
     }
 
     public interface ListenerAdapter {
-        void onClickList(Result filme);
+        void onClickList(Filme filme);
     }
 }

@@ -1,6 +1,5 @@
 package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
-import android.arch.persistence.room.Database;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,9 +20,8 @@ import com.example.galdino.filmespopulares.dataBase.AppDataBase;
 import com.example.galdino.filmespopulares.databinding.FragmentFilmeDetalheBinding;
 import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
 import com.example.galdino.filmespopulares.dominio.AnimationControler;
-import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Result;
-import com.example.galdino.filmespopulares.entity.Filme;
 import com.example.galdino.filmespopulares.mvp.di.AppComponent;
 import com.example.galdino.filmespopulares.mvp.di.DaggerAppComponent;
 import com.example.galdino.filmespopulares.mvp.di.modules.ModelModule;
@@ -35,9 +33,9 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     private FragmentFilmeDetalheBinding mBinding;
     private FilmeDetalheMvpPresenter mPresenter;
     private Integer mIdFilme;
-    private FilmeDetalhe mFilmeDetalhe;
+    private Filme mFilme;
     private boolean mFgListaTrailerAberta;
-    private Filme filme;
+    private com.example.galdino.filmespopulares.entity.Filme filme;
     private AppDataBase db;
     private Menu menu;
 
@@ -98,41 +96,41 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     }
 
     @Override
-    public void onFilmeDetalhePreparado(FilmeDetalhe filmeDetalhe) {
-        if(filmeDetalhe != null && mBinding != null)
+    public void onFilmeDetalhePreparado(Filme filme) {
+        if(filme != null && mBinding != null)
         {
             mBinding.labelTrailer.setOnClickListener(this);
             mBinding.includeListTrailers.tvFecharListaTrailers.setOnClickListener(this);
 
-            mFilmeDetalhe = filmeDetalhe;
+            mFilme = filme;
             db = AppDataBase.getInstance(getContext().getApplicationContext());
 
             mBinding.inclCapaFilme.getRoot().setVisibility(View.VISIBLE);
-            String urlCapa = getResources().getString(R.string.url_images_500) + filmeDetalhe.getPosterPath();
+            String urlCapa = getResources().getString(R.string.url_images_500) + filme.getPosterPath();
             IncludeCapaFilmeBinding includeCapaFilmeBinding = mBinding.inclCapaFilme;
             Picasso.with(mBinding.getRoot().getContext()).load(urlCapa).into(includeCapaFilmeBinding.ivCapaFilme);
-            mBinding.tvNomeFilme.setText(filmeDetalhe.getTitle());
-            if(filmeDetalhe.getReleaseDate()!= null)
+            mBinding.tvNomeFilme.setText(filme.getTitle());
+            if(filme.getReleaseDate()!= null)
             {
-                String ano = filmeDetalhe.getReleaseDate().substring(0,filmeDetalhe.getReleaseDate().indexOf("-"));
+                String ano = filme.getReleaseDate().substring(0, filme.getReleaseDate().indexOf("-"));
                 mBinding.tvAno.setText(ano);
             }
-            if(filmeDetalhe.getRuntime() != null)
+            if(filme.getRuntime() != null)
             {
-                String tempo = Integer.toString(filmeDetalhe.getRuntime());
+                String tempo = Integer.toString(filme.getRuntime());
                 tempo += "min";
                 mBinding.tvTempoFilme.setText(tempo);
             }
-            if(filmeDetalhe.getVoteAverage() != null)
+            if(filme.getVoteAverage() != null)
             {
-                String nota =  Double.toString(filmeDetalhe.getVoteAverage()) + "/10";
+                String nota =  Double.toString(filme.getVoteAverage()) + "/10";
                 mBinding.tvNotaFilme.setText(nota);
             }
-            mBinding.tvDescricaoFilme.setText(filmeDetalhe.getOverview());
+            mBinding.tvDescricaoFilme.setText(filme.getOverview());
 
-            if(filmeDetalhe.getVideos() != null)
+            if(filme.getVideos() != null)
             {
-                AdapterListTrailers adapterListTrailers = new AdapterListTrailers(filmeDetalhe.getVideos().getResults());
+                AdapterListTrailers adapterListTrailers = new AdapterListTrailers(filme.getVideos().getResults());
                 if(mListener != null) {
                     adapterListTrailers.setListener(mListener);
                 }
@@ -143,19 +141,19 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
                 mBinding.includeListTrailers.rvTrailers.setNestedScrollingEnabled(false);
             }
 
-            filme = db.filmeDAO().selectById(mFilmeDetalhe.getId());
-            if(filme == null)
+            this.filme = db.filmeDAO().selectById(mFilme.getId());
+            if(this.filme == null)
             {
-                filme = new Filme();
-                filme.setId(mFilmeDetalhe.getId());
-                filme.setFgFavorito(0);
-                db.filmeDAO().InsertAll(filme);
+                this.filme = new com.example.galdino.filmespopulares.entity.Filme();
+                this.filme.setId(mFilme.getId());
+                this.filme.setFgFavorito(0);
+                db.filmeDAO().InsertAll(this.filme);
             }
             else
             {
-                if(filme.getFgFavorito() == 1)
+                if(this.filme.getFgFavorito() == 1)
                 {
-                    mFilmeDetalhe.setFgFavorito(false); // Passa false pra ficar true
+                    mFilme.setFgFavorito(false); // Passa false pra ficar true
                     onOptionsItemSelected(menu.findItem(R.id.im_filmes_detalhe_favorito));
                 }
             }
@@ -168,16 +166,16 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
         int id = item.getItemId();
         if(id == R.id.im_filmes_detalhe_favorito)
         {
-            if(mFilmeDetalhe.isFgFavorito())
+            if(mFilme.isFgFavorito())
             {
                 item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(),R.drawable.ic_favorito_vazio_azul));
-                mFilmeDetalhe.setFgFavorito(false);
+                mFilme.setFgFavorito(false);
                 filme.setFgFavorito(0);
             }
             else
             {
                 item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(),R.drawable.ic_favorito_preenchido_azul));
-                mFilmeDetalhe.setFgFavorito(true);
+                mFilme.setFgFavorito(true);
                 filme.setFgFavorito(1);
             }
             db.filmeDAO().updateFilme(filme);

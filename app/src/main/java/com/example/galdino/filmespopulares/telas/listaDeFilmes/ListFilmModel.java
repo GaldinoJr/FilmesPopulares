@@ -1,7 +1,7 @@
 package com.example.galdino.filmespopulares.telas.listaDeFilmes;
 
+import com.example.galdino.filmespopulares.dominio.ObjetoListaFilmes;
 import com.example.galdino.filmespopulares.dominio.Filme;
-import com.example.galdino.filmespopulares.dominio.Result;
 import com.example.galdino.filmespopulares.utilities.FilmeApiMvpHelper;
 
 import java.util.List;
@@ -22,19 +22,19 @@ public class ListFilmModel implements ListFilmMvpModel
     }
 
     @Override
-    public Single<List<Result>> getFilmesPopulares() {
+    public Single<List<Filme>> getFilmesPopulares() {
         return mHelper.getPopular()
                 .singleOrError();
     }
 
     @Override
-    public Single<List<Result>> getFilmesMelhorAvaliados() {
+    public Single<List<Filme>> getFilmesMelhorAvaliados() {
         return mHelper.getMelhorAvaliado()
                 .singleOrError();
     }
 
     @Override
-    public Single<Filme> getMovie(String movieId) {
+    public Single<ObjetoListaFilmes> getMovie(String movieId) {
         return null;
     }
 
@@ -49,7 +49,7 @@ public class ListFilmModel implements ListFilmMvpModel
     }
 
     @Override
-    public Single<Filme> getMovieSummary(String movieId) {
+    public Single<ObjetoListaFilmes> getMovieSummary(String movieId) {
         return null;
     }
 }

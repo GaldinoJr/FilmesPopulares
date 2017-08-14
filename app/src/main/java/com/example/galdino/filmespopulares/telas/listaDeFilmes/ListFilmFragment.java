@@ -14,8 +14,8 @@ import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.adapter.AdapterListFilmes;
 
 import com.example.galdino.filmespopulares.databinding.FragmentListFilmBinding;
+import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.telas.detalhesDoFilme.FilmeDetalheActivity;
-import com.example.galdino.filmespopulares.dominio.Result;
 
 import com.example.galdino.filmespopulares.mvp.di.AppComponent;
 import com.example.galdino.filmespopulares.mvp.di.DaggerAppComponent;
@@ -78,7 +78,7 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
     }
 
     @Override
-    public void onFilmesPreparados(List<Result> listaFilmes) {
+    public void onFilmesPreparados(List<Filme> listaFilmes) {
         if (listaFilmes != null)
         {
 //            int posterWidth = getResources().getDimensionPixelSize(R.dimen.movie_poster_size_median);
@@ -123,7 +123,7 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
 
     private AdapterListFilmes.ListenerAdapter mListener = new AdapterListFilmes.ListenerAdapter() {
         @Override
-        public void onClickList(Result result)
+        public void onClickList(Filme result)
         {
             Intent intent = new Intent();
             if(result.getId() != null)

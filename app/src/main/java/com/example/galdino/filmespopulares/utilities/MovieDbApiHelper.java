@@ -2,10 +2,9 @@ package com.example.galdino.filmespopulares.utilities;
 
 import android.content.Context;
 
-import com.example.galdino.filmespopulares.dominio.Filme;
-import com.example.galdino.filmespopulares.dominio.Result;
+import com.example.galdino.filmespopulares.dominio.ObjetoListaFilmes;
 import com.example.galdino.filmespopulares.R;
-import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.dominio.Filme;
 
 import java.util.List;
 
@@ -50,25 +49,25 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     }
 
     @Override
-    public Observable<List<Result>> getPopular() {
+    public Observable<List<Filme>> getPopular() {
         return mMovieDbApi.getPopular(mApiKey)
                 .flatMap(getMovieResponseMapper());
     }
 
     @Override
-    public Observable<List<Result>> getMelhorAvaliado() {
+    public Observable<List<Filme>> getMelhorAvaliado() {
         return mMovieDbApi.getMelhorAvaliado(mApiKey)
                 .flatMap(getMovieResponseMapper());
     }
 
     @Override
-    public Observable<FilmeDetalhe> getFilmeDetalhe(int movieId) {
+    public Observable<Filme> getFilmeDetalhe(int movieId) {
         return mMovieDbApi.getFilmeDetalhe(movieId, mApiKey,VALUE_PARAMETER_FILME_DETALHE_TRAILERS)
-                .cast(FilmeDetalhe.class);
+                .cast(Filme.class);
     }
 
     @Override
-    public Observable<Filme> getMovieSummary(String movieId) {
+    public Observable<ObjetoListaFilmes> getMovieSummary(String movieId) {
         return null;
     }
 
@@ -83,10 +82,10 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     }
 
     @android.support.annotation.NonNull
-    private Function<Filme, Observable<List<Result>>> getMovieResponseMapper() {
-        return new Function<Filme, Observable<List<Result>>>() {
+    private Function<ObjetoListaFilmes, Observable<List<Filme>>> getMovieResponseMapper() {
+        return new Function<ObjetoListaFilmes, Observable<List<Filme>>>() {
             @Override
-            public Observable<List<Result>> apply(@NonNull Filme moviesResponseBody) throws Exception {
+            public Observable<List<Filme>> apply(@NonNull ObjetoListaFilmes moviesResponseBody) throws Exception {
 
                 return Observable.just(moviesResponseBody.getResults());
             }
@@ -97,14 +96,14 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     interface MovieDbApi {
 
         @GET(METODO_POPULAR)
-        Observable<Filme> getPopular(@Query(PARAMETER_FILME_DETALHE_CHAVE_API) String apiKey);
+        Observable<ObjetoListaFilmes> getPopular(@Query(PARAMETER_FILME_DETALHE_CHAVE_API) String apiKey);
 
         @GET(METODO_MELHOR_AVALIADO)
-        Observable<Filme> getMelhorAvaliado(@Query(PARAMETER_FILME_DETALHE_CHAVE_API) String apiKey);
+        Observable<ObjetoListaFilmes> getMelhorAvaliado(@Query(PARAMETER_FILME_DETALHE_CHAVE_API) String apiKey);
 
         @GET(FILME_DETALHE_PATH)
-        Observable<FilmeDetalhe> getFilmeDetalhe(@Path(FILME_DETALHE_PATH_FILME_ID) int movieId,
-                                                 @Query(PARAMETER_FILME_DETALHE_CHAVE_API) String apiKey,
-                                                 @Query(PARAMETER_FILME_DETALHE_TRAILERS) String trailer);
+        Observable<Filme> getFilmeDetalhe(@Path(FILME_DETALHE_PATH_FILME_ID) int movieId,
+                                          @Query(PARAMETER_FILME_DETALHE_CHAVE_API) String apiKey,
+                                          @Query(PARAMETER_FILME_DETALHE_TRAILERS) String trailer);
     }
 }

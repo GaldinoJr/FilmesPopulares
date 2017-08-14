@@ -1,6 +1,6 @@
 package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
-import com.example.galdino.filmespopulares.dominio.filmeDetalhe.FilmeDetalhe;
+import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.utilities.FilmeApiMvpHelper;
 
 import io.reactivex.Single;
@@ -18,7 +18,7 @@ public class FilmeDetalheModel implements FilmeDetalheMvpModel
     }
 
     @Override
-    public Single<FilmeDetalhe> getFilmeDetalhe(int idFilme) {
+    public Single<Filme> getFilmeDetalhe(int idFilme) {
         return mvpHelper.getFilmeDetalhe(idFilme).singleOrError();
     }
 }

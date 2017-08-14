@@ -1,7 +1,7 @@
 package com.example.galdino.filmespopulares.telas.listaDeFilmes;
 
+import com.example.galdino.filmespopulares.dominio.ObjetoListaFilmes;
 import com.example.galdino.filmespopulares.dominio.Filme;
-import com.example.galdino.filmespopulares.dominio.Result;
 
 import java.util.List;
 
@@ -13,15 +13,15 @@ import io.reactivex.Single;
 
 public interface ListFilmMvpModel
 {
-    Single<List<Result>> getFilmesPopulares();
+    Single<List<Filme>> getFilmesPopulares();
 
-    Single<List<Result>> getFilmesMelhorAvaliados();
+    Single<List<Filme>> getFilmesMelhorAvaliados();
 
-    Single<Filme> getMovie(String movieId);
+    Single<ObjetoListaFilmes> getMovie(String movieId);
 
     Single<String> getMoviePosterUrl(int width, String movieId);
 
     Single<String> getMovieTitle(String movieId);
 
-    Single<Filme> getMovieSummary(String movieId);
+    Single<ObjetoListaFilmes> getMovieSummary(String movieId);
 }
