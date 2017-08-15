@@ -2,6 +2,7 @@ package com.example.galdino.filmespopulares.utilities;
 
 import android.content.Context;
 
+import com.example.galdino.filmespopulares.dataBase.AppDataBase;
 import com.example.galdino.filmespopulares.dominio.ObjetoListaFilmes;
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.dominio.Filme;
@@ -58,6 +59,13 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     public Observable<List<Filme>> getMelhorAvaliado() {
         return mMovieDbApi.getMelhorAvaliado(mApiKey)
                 .flatMap(getMovieResponseMapper());
+    }
+
+    @Override
+    public Observable<List<Filme>> getFavorito(Context context) {
+        AppDataBase db = AppDataBase.getInstance(context);
+
+        return Observable.just(db.filmeDAO().getAll());
     }
 
     @Override

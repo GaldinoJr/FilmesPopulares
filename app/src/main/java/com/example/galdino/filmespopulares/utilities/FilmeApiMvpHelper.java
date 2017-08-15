@@ -1,5 +1,7 @@
 package com.example.galdino.filmespopulares.utilities;
 
+import android.content.Context;
+
 import com.example.galdino.filmespopulares.dominio.ObjetoListaFilmes;
 import com.example.galdino.filmespopulares.dominio.Filme;
 
@@ -16,6 +18,8 @@ public interface FilmeApiMvpHelper
     Observable<List<Filme>> getPopular();
 
     Observable<List<Filme>> getMelhorAvaliado();
+
+    Observable<List<Filme>> getFavorito(Context context);
 
     Observable<Filme> getFilmeDetalhe(int movieId);
 

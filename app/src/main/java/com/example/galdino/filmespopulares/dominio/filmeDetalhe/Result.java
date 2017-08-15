@@ -1,10 +1,16 @@
 
 package com.example.galdino.filmespopulares.dominio.filmeDetalhe;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "tb_result")
 public class Result {
+    @PrimaryKey(autoGenerate = true)
+    private int uid;
 
     @SerializedName("id")
     @Expose
@@ -95,4 +101,11 @@ public class Result {
         this.type = type;
     }
 
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
 }

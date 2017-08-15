@@ -30,6 +30,8 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
     public static final String EXTRA_TIPO_PESQUISA = "EXTRA_TIPO_PESQUISA";
     public static final int DF_FILMES_POPULARES = 1001;
     public static final int DF_FILMES_MELHOR_AVALIADO = 1002;
+    public static final int DF_FILMES_FAVORITOS = 1003;
+
     private FragmentListFilmBinding mBinding;
     private ListFilmMvpPresenter listFilmPresenter;
     private int mTipoPesquisa;
@@ -110,9 +112,13 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
         if(mTipoPesquisa == DF_FILMES_POPULARES) {
             listFilmPresenter.getFilmesPopulares();
         }
-        else
+        else if(mTipoPesquisa == DF_FILMES_MELHOR_AVALIADO)
         {
             listFilmPresenter.getFilmesMelhorAvaliados();
+        }
+        else
+        {
+            listFilmPresenter.getFilmesFavoritos(getContext().getApplicationContext());
         }
     }
 

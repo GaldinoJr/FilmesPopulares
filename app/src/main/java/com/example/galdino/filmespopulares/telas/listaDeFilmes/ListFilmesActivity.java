@@ -39,8 +39,6 @@ public class ListFilmesActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-
         switch (id) {
             case R.id.item_menu_mais_popular:
                 mBinding.tvLabelTiposFilmes.setText(getResources().getString(R.string.filmes_populares));
@@ -50,6 +48,8 @@ public class ListFilmesActivity extends AppCompatActivity {
                 mBinding.tvLabelTiposFilmes.setText(getResources().getString(R.string.filmes_melhor_avaliado));
                 inflarFragment(ListFilmFragment.DF_FILMES_MELHOR_AVALIADO);
                 break;
+            case R.id.item_menu_favoritos:
+                mBinding.tvLabelTiposFilmes.setText(getResources().getString(R.string.filmes_favoritados));
         }
 
         return super.onOptionsItemSelected(item);

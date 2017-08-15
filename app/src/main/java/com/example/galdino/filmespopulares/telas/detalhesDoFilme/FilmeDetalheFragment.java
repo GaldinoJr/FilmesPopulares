@@ -35,7 +35,7 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     private Integer mIdFilme;
     private Filme mFilme;
     private boolean mFgListaTrailerAberta;
-    private com.example.galdino.filmespopulares.entity.Filme filme;
+    private Filme filme;
     private AppDataBase db;
     private Menu menu;
 
@@ -144,7 +144,7 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
             this.filme = db.filmeDAO().selectById(mFilme.getId());
             if(this.filme == null)
             {
-                this.filme = new com.example.galdino.filmespopulares.entity.Filme();
+                this.filme = new Filme();
                 this.filme.setId(mFilme.getId());
                 this.filme.setFgFavorito(0);
                 db.filmeDAO().InsertAll(this.filme);
@@ -153,7 +153,7 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
             {
                 if(this.filme.getFgFavorito() == 1)
                 {
-                    mFilme.setFgFavorito(false); // Passa false pra ficar true
+                    mFilme.setFgFavorito(0); // Passa false pra ficar true
                     onOptionsItemSelected(menu.findItem(R.id.im_filmes_detalhe_favorito));
                 }
             }
@@ -166,16 +166,16 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
         int id = item.getItemId();
         if(id == R.id.im_filmes_detalhe_favorito)
         {
-            if(mFilme.isFgFavorito())
+            if(mFilme.getFgFavorito() == 1)
             {
                 item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(),R.drawable.ic_favorito_vazio_azul));
-                mFilme.setFgFavorito(false);
+                mFilme.setFgFavorito(0);
                 filme.setFgFavorito(0);
             }
             else
             {
                 item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(),R.drawable.ic_favorito_preenchido_azul));
-                mFilme.setFgFavorito(true);
+                mFilme.setFgFavorito(1);
                 filme.setFgFavorito(1);
             }
             db.filmeDAO().updateFilme(filme);

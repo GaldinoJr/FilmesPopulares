@@ -5,8 +5,9 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.example.galdino.filmespopulares.entity.Filme;
+import com.example.galdino.filmespopulares.dominio.Filme;
 
+import java.util.List;
 
 
 /**
@@ -16,6 +17,9 @@ import com.example.galdino.filmespopulares.entity.Filme;
 @Dao
 public interface FilmeDAO
 {
+    @Query("SELECT * FROM tb_filme")
+    List<Filme> getAll();
+
     @Query("SELECT * FROM tb_filme WHERE id LIKE :id")
     Filme selectById(int id);
 

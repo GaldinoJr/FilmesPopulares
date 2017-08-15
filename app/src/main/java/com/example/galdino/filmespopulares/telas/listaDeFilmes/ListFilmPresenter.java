@@ -1,5 +1,8 @@
 package com.example.galdino.filmespopulares.telas.listaDeFilmes;
 
+import android.content.Context;
+
+import com.example.galdino.filmespopulares.dataBase.AppDataBase;
 import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.mvp.BasePresenter;
 import com.example.galdino.filmespopulares.mvp.schedulerprovider.SchedulerProvider;
@@ -9,6 +12,8 @@ import java.util.List;
 import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by Galdino on 19/07/2017.
@@ -37,6 +42,15 @@ public class ListFilmPresenter extends BasePresenter<ListFilmMvpView> implements
     public void getFilmesMelhorAvaliados() {
         SchedulerProvider schedulerProvider = getSchedulerProvider();
         mFilmeMvpDataManager.getFilmesMelhorAvaliados()
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .subscribe(getFilmesObserver());
+    }
+
+    @Override
+    public void getFilmesFavoritos(Context context) {
+        SchedulerProvider schedulerProvider = getSchedulerProvider();
+        mFilmeMvpDataManager.getFilmesFavoritos(context)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .subscribe(getFilmesObserver());

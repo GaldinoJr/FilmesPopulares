@@ -1,5 +1,8 @@
 package com.example.galdino.filmespopulares.telas.listaDeFilmes;
 
+import android.content.Context;
+
+import com.example.galdino.filmespopulares.dataBase.AppDataBase;
 import com.example.galdino.filmespopulares.dominio.ObjetoListaFilmes;
 import com.example.galdino.filmespopulares.dominio.Filme;
 import com.example.galdino.filmespopulares.utilities.FilmeApiMvpHelper;
@@ -31,6 +34,11 @@ public class ListFilmModel implements ListFilmMvpModel
     public Single<List<Filme>> getFilmesMelhorAvaliados() {
         return mHelper.getMelhorAvaliado()
                 .singleOrError();
+    }
+
+    @Override
+    public Single<List<Filme>> getFilmesFavoritos(Context context) {
+        return mHelper.getFavorito(context).singleOrError();
     }
 
     @Override

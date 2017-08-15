@@ -8,19 +8,25 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import com.example.galdino.filmespopulares.dao.FilmeDAO;
-import com.example.galdino.filmespopulares.entity.Filme;
+import com.example.galdino.filmespopulares.dao.ResultDAO;
+import com.example.galdino.filmespopulares.dao.VideosDAO;
+import com.example.galdino.filmespopulares.dominio.Filme;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Result;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Videos;
 
 /**
  * Created by Galdino on 11/08/2017.
  */
-
-@Database(entities = {Filme.class}, version = 2)
+//, exportSchema = false
+@Database(entities = {Filme.class, Videos.class, Result.class}, version = 4)
 public abstract class AppDataBase extends RoomDatabase
 {
     private static AppDataBase INSTANCE;
 
     // DAO
     public abstract FilmeDAO filmeDAO();
+    public abstract VideosDAO videoDAO();
+    public abstract ResultDAO resultDAO();
 
     public static AppDataBase getInstance(Context context)
     {

@@ -1,5 +1,7 @@
 package com.example.galdino.filmespopulares.telas.listaDeFilmes;
 
+import android.content.Context;
+
 import com.example.galdino.filmespopulares.dominio.ObjetoListaFilmes;
 import com.example.galdino.filmespopulares.dominio.Filme;
 
@@ -16,6 +18,8 @@ public interface ListFilmMvpModel
     Single<List<Filme>> getFilmesPopulares();
 
     Single<List<Filme>> getFilmesMelhorAvaliados();
+
+    Single<List<Filme>> getFilmesFavoritos(Context context);
 
     Single<ObjetoListaFilmes> getMovie(String movieId);
 

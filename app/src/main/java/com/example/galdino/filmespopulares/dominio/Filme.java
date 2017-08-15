@@ -1,6 +1,11 @@
 
 package com.example.galdino.filmespopulares.dominio;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,31 +18,69 @@ import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Videos;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "tb_filme")
 public class Filme implements Serializable
 {
-    private boolean fgFavorito;
+    @PrimaryKey(autoGenerate = true)
+    private int uid;
 
+    @ColumnInfo(name = "id")
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+
+    @ColumnInfo(name = "fg_favorito")
+    private int fgFavorito;
+
+    @ColumnInfo(name = "poster_path")
+    @SerializedName("poster_path")
+    @Expose
+    private String posterPath;
+
+    @ColumnInfo(name = "title")
+    @SerializedName("title")
+    @Expose
+    private String title;
+
+    @ColumnInfo(name = "release_date")
+    @SerializedName("release_date")
+    @Expose
+    private String releaseDate;
+
+    @ColumnInfo(name = "runtime")
+    @SerializedName("runtime")
+    @Expose
+    private Integer runtime;
+
+    @ColumnInfo(name = "vote_average")
+    @SerializedName("vote_average")
+    @Expose
+    private Double voteAverage;
+
+    @ColumnInfo(name = "overview")
+    @SerializedName("overview")
+    @Expose
+    private String overview;
+    // colunas da classe
     @SerializedName("adult")
     @Expose
     private Boolean adult;
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
-    @SerializedName("belongs_to_collection")
-    @Expose
-    private BelongsToCollection belongsToCollection;
+//    @SerializedName("belongs_to_collection")
+//    @Expose
+//    private BelongsToCollection belongsToCollection;
     @SerializedName("budget")
     @Expose
     private Integer budget;
-    @SerializedName("genres")
-    @Expose
-    private List<Genre> genres = null;
+//    @SerializedName("genres")
+//    @Expose
+//    private List<Genre> genres = null;
     @SerializedName("homepage")
     @Expose
     private String homepage;
-    @SerializedName("id")
-    @Expose
-    private Integer id;
+
     @SerializedName("imdb_id")
     @Expose
     private String imdbId;
@@ -47,64 +90,48 @@ public class Filme implements Serializable
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
-    @SerializedName("overview")
-    @Expose
-    private String overview;
     @SerializedName("popularity")
     @Expose
     private Double popularity;
-    @SerializedName("poster_path")
-    @Expose
-    private String posterPath;
-    @SerializedName("production_companies")
-    @Expose
-    private List<ProductionCompany> productionCompanies = null;
-    @SerializedName("production_countries")
-    @Expose
-    private List<ProductionCountry> productionCountries = null;
-    @SerializedName("release_date")
-    @Expose
-    private String releaseDate;
+//    @SerializedName("production_companies")
+//    @Expose
+//    private List<ProductionCompany> productionCompanies = null;
+//    @SerializedName("production_countries")
+//    @Expose
+//    private List<ProductionCountry> productionCountries = null;
     @SerializedName("revenue")
     @Expose
     private Integer revenue;
-    @SerializedName("runtime")
-    @Expose
-    private Integer runtime;
-    @SerializedName("spoken_languages")
-    @Expose
-    private List<SpokenLanguage> spokenLanguages = null;
+//    @SerializedName("spoken_languages")
+//    @Expose
+//    private List<SpokenLanguage> spokenLanguages = null;
     @SerializedName("status")
     @Expose
     private String status;
     @SerializedName("tagline")
     @Expose
     private String tagline;
-    @SerializedName("title")
-    @Expose
-    private String title;
     @SerializedName("video")
     @Expose
     private Boolean video;
-    @SerializedName("vote_average")
-    @Expose
-    private Double voteAverage;
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
+    @Ignore
     @SerializedName("videos")
     @Expose
     private Videos videos;
     // dados do result
+    @Ignore
     @SerializedName("genre_ids")
     @Expose
     private List<Integer> genreIds = null;
 
-    public boolean isFgFavorito() {
+    public int getFgFavorito() {
         return fgFavorito;
     }
 
-    public void setFgFavorito(boolean fgFavorito) {
+    public void setFgFavorito(int fgFavorito) {
         this.fgFavorito = fgFavorito;
     }
 
@@ -124,13 +151,13 @@ public class Filme implements Serializable
         this.backdropPath = backdropPath;
     }
 
-    public BelongsToCollection getBelongsToCollection() {
-        return belongsToCollection;
-    }
-
-    public void setBelongsToCollection(BelongsToCollection belongsToCollection) {
-        this.belongsToCollection = belongsToCollection;
-    }
+//    public BelongsToCollection getBelongsToCollection() {
+//        return belongsToCollection;
+//    }
+//
+//    public void setBelongsToCollection(BelongsToCollection belongsToCollection) {
+//        this.belongsToCollection = belongsToCollection;
+//    }
 
     public Integer getBudget() {
         return budget;
@@ -140,13 +167,13 @@ public class Filme implements Serializable
         this.budget = budget;
     }
 
-    public List<Genre> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
-    }
+//    public List<Genre> getGenres() {
+//        return genres;
+//    }
+//
+//    public void setGenres(List<Genre> genres) {
+//        this.genres = genres;
+//    }
 
     public String getHomepage() {
         return homepage;
@@ -212,21 +239,21 @@ public class Filme implements Serializable
         this.posterPath = posterPath;
     }
 
-    public List<ProductionCompany> getProductionCompanies() {
-        return productionCompanies;
-    }
-
-    public void setProductionCompanies(List<ProductionCompany> productionCompanies) {
-        this.productionCompanies = productionCompanies;
-    }
-
-    public List<ProductionCountry> getProductionCountries() {
-        return productionCountries;
-    }
-
-    public void setProductionCountries(List<ProductionCountry> productionCountries) {
-        this.productionCountries = productionCountries;
-    }
+//    public List<ProductionCompany> getProductionCompanies() {
+//        return productionCompanies;
+//    }
+//
+//    public void setProductionCompanies(List<ProductionCompany> productionCompanies) {
+//        this.productionCompanies = productionCompanies;
+//    }
+//
+//    public List<ProductionCountry> getProductionCountries() {
+//        return productionCountries;
+//    }
+//
+//    public void setProductionCountries(List<ProductionCountry> productionCountries) {
+//        this.productionCountries = productionCountries;
+//    }
 
     public String getReleaseDate() {
         return releaseDate;
@@ -252,13 +279,13 @@ public class Filme implements Serializable
         this.runtime = runtime;
     }
 
-    public List<SpokenLanguage> getSpokenLanguages() {
-        return spokenLanguages;
-    }
-
-    public void setSpokenLanguages(List<SpokenLanguage> spokenLanguages) {
-        this.spokenLanguages = spokenLanguages;
-    }
+//    public List<SpokenLanguage> getSpokenLanguages() {
+//        return spokenLanguages;
+//    }
+//
+//    public void setSpokenLanguages(List<SpokenLanguage> spokenLanguages) {
+//        this.spokenLanguages = spokenLanguages;
+//    }
 
     public String getStatus() {
         return status;
@@ -322,5 +349,13 @@ public class Filme implements Serializable
 
     public void setGenreIds(List<Integer> genreIds) {
         this.genreIds = genreIds;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 }

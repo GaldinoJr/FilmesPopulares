@@ -21,4 +21,6 @@
     <string name="erro_buscar_filmes">Erro ao obter os filmes</string>
     <string name="title_activity_filme_detalhe">ActivityFilmeDetalhe</string>
     <string name="erro_buscar_detalhe_filme">Erro ao obter informações do filme</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="filmes_favoritados">Filmes favoritados</string>
 </resources>
