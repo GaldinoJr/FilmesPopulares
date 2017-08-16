@@ -39,11 +39,12 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
 
     private final MovieDbApi mMovieDbApi;
     private String mApiKey;
+    private Context mContext;
 
     public MovieDbApiHelper(Context context) {
         Retrofit retrofit = getRetrofit();
         mMovieDbApi = retrofit.create(MovieDbApi.class);
-
+        mContext = context;
         if (context != null) {
             mApiKey = context.getString(R.string.chave_api);
         }
@@ -62,16 +63,27 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     }
 
     @Override
-    public Observable<List<Filme>> getFavorito(Context context) {
-        AppDataBase db = AppDataBase.getInstance(context);
+    public Observable<List<Filme>> getFavorito() {
+        AppDataBase db = AppDataBase.getInstance(mContext);
 
         return Observable.just(db.filmeDAO().getAll());
     }
 
     @Override
-    public Observable<Filme> getFilmeDetalhe(int movieId) {
-        return mMovieDbApi.getFilmeDetalhe(movieId, mApiKey,VALUE_PARAMETER_FILME_DETALHE_TRAILERS)
-                .cast(Filme.class);
+    public Observable<Filme> getFilmeDetalhe(int idFilme)
+    {
+        AppDataBase db = AppDataBase.getInstance(mContext);
+        Filme filme = db.filmeDAO().selectById(idFilme);
+        Observable<Filme> filmeObservable;
+        if(filme == null) {
+            filmeObservable =  mMovieDbApi.getFilmeDetalhe(idFilme, mApiKey, VALUE_PARAMETER_FILME_DETALHE_TRAILERS)
+                    .cast(Filme.class);
+        }
+        else
+        {
+            filmeObservable = Observable.just(filme);
+        }
+        return filmeObservable;
     }
 
     @Override

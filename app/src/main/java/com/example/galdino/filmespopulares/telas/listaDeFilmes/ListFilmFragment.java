@@ -118,7 +118,7 @@ public class ListFilmFragment extends Fragment implements ListFilmMvpView, Swipe
         }
         else
         {
-            listFilmPresenter.getFilmesFavoritos(getContext().getApplicationContext());
+            listFilmPresenter.getFilmesFavoritos();
         }
     }
 

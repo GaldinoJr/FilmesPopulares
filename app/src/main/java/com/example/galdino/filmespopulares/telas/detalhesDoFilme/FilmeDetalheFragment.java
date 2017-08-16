@@ -35,7 +35,7 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     private Integer mIdFilme;
     private Filme mFilme;
     private boolean mFgListaTrailerAberta;
-    private Filme filme;
+//    private Filme filme;
     private AppDataBase db;
     private Menu menu;
 
@@ -140,23 +140,6 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
                 mBinding.includeListTrailers.rvTrailers.setLayoutManager(linearLayoutManager);
                 mBinding.includeListTrailers.rvTrailers.setNestedScrollingEnabled(false);
             }
-
-            this.filme = db.filmeDAO().selectById(mFilme.getId());
-            if(this.filme == null)
-            {
-                this.filme = new Filme();
-                this.filme.setId(mFilme.getId());
-                this.filme.setFgFavorito(0);
-                db.filmeDAO().InsertAll(this.filme);
-            }
-            else
-            {
-                if(this.filme.getFgFavorito() == 1)
-                {
-                    mFilme.setFgFavorito(0); // Passa false pra ficar true
-                    onOptionsItemSelected(menu.findItem(R.id.im_filmes_detalhe_favorito));
-                }
-            }
         }
         mBinding.pbLoading.setVisibility(View.INVISIBLE);
     }
@@ -170,15 +153,16 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
             {
                 item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(),R.drawable.ic_favorito_vazio_azul));
                 mFilme.setFgFavorito(0);
-                filme.setFgFavorito(0);
+                db.filmeDAO().deleteAll(mFilme);
             }
             else
             {
                 item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(),R.drawable.ic_favorito_preenchido_azul));
                 mFilme.setFgFavorito(1);
-                filme.setFgFavorito(1);
+                if(mFilme.getUid() == 0) {
+                    db.filmeDAO().insertAll(mFilme);
+                }
             }
-            db.filmeDAO().updateFilme(filme);
         }
         else
         {
@@ -226,5 +210,10 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
         this.menu = menu;
         MenuInflater menuInflater = getActivity().getMenuInflater();
         menuInflater.inflate(R.menu.menu_activity_filmes_detalhe,menu);
+        if(mFilme != null && mFilme.getUid() > 0)
+        {
+            mFilme.setFgFavorito(0); // Passa false pra ficar true
+            onOptionsItemSelected(menu.findItem(R.id.im_filmes_detalhe_favorito));
+        }
     }
 }

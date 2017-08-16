@@ -37,8 +37,8 @@ public class ListFilmModel implements ListFilmMvpModel
     }
 
     @Override
-    public Single<List<Filme>> getFilmesFavoritos(Context context) {
-        return mHelper.getFavorito(context).singleOrError();
+    public Single<List<Filme>> getFilmesFavoritos() {
+        return mHelper.getFavorito().singleOrError();
     }
 
     @Override

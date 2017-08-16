@@ -19,7 +19,7 @@ public interface FilmeApiMvpHelper
 
     Observable<List<Filme>> getMelhorAvaliado();
 
-    Observable<List<Filme>> getFavorito(Context context);
+    Observable<List<Filme>> getFavorito();
 
     Observable<Filme> getFilmeDetalhe(int movieId);
 

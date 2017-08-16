@@ -49,7 +49,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void insertFilme()
     {
-        long[] longs = mAppDataBase.filmeDAO().InsertAll(mFilme);
+        long[] longs = mAppDataBase.filmeDAO().insertAll(mFilme);
         Assert.assertTrue(longs[0] > 0);
     }
 

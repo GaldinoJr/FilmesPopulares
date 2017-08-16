@@ -50,6 +50,7 @@ public class ListFilmesActivity extends AppCompatActivity {
                 break;
             case R.id.item_menu_favoritos:
                 mBinding.tvLabelTiposFilmes.setText(getResources().getString(R.string.filmes_favoritados));
+                inflarFragment(ListFilmFragment.DF_FILMES_FAVORITOS);
         }
 
         return super.onOptionsItemSelected(item);

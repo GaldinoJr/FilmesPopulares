@@ -19,7 +19,7 @@ public interface ListFilmMvpModel
 
     Single<List<Filme>> getFilmesMelhorAvaliados();
 
-    Single<List<Filme>> getFilmesFavoritos(Context context);
+    Single<List<Filme>> getFilmesFavoritos();
 
     Single<ObjetoListaFilmes> getMovie(String movieId);
 

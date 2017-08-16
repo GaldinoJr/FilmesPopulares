@@ -48,9 +48,9 @@ public class ListFilmPresenter extends BasePresenter<ListFilmMvpView> implements
     }
 
     @Override
-    public void getFilmesFavoritos(Context context) {
+    public void getFilmesFavoritos() {
         SchedulerProvider schedulerProvider = getSchedulerProvider();
-        mFilmeMvpDataManager.getFilmesFavoritos(context)
+        mFilmeMvpDataManager.getFilmesFavoritos()
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .subscribe(getFilmesObserver());

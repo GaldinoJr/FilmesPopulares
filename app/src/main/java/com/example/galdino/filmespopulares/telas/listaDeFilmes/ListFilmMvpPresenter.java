@@ -14,5 +14,5 @@ public interface ListFilmMvpPresenter extends MvpPresenter<ListFilmMvpView>
 
     void getFilmesMelhorAvaliados();
 
-    void getFilmesFavoritos(Context context);
+    void getFilmesFavoritos();
 }

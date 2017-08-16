@@ -1,6 +1,7 @@
 package com.example.galdino.filmespopulares.dao;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
@@ -17,6 +18,9 @@ import java.util.List;
 @Dao
 public interface FilmeDAO
 {
+    @Delete
+    int deleteAll(Filme... filmes);
+
     @Query("SELECT * FROM tb_filme")
     List<Filme> getAll();
 
@@ -24,7 +28,7 @@ public interface FilmeDAO
     Filme selectById(int id);
 
     @Insert
-    long[] InsertAll(Filme... filmes);
+    long[] insertAll(Filme... filmes);
 
     @Query("SELECT COUNT(*) FROM tb_filme")
     int countUsers();
