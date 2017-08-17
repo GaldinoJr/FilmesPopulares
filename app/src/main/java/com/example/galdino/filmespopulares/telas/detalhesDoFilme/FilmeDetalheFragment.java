@@ -15,17 +15,22 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.galdino.filmespopulares.R;
+import com.example.galdino.filmespopulares.adapter.AdapterListComentario;
 import com.example.galdino.filmespopulares.adapter.AdapterListTrailers;
 import com.example.galdino.filmespopulares.dataBase.AppDataBase;
 import com.example.galdino.filmespopulares.databinding.FragmentFilmeDetalheBinding;
 import com.example.galdino.filmespopulares.databinding.IncludeCapaFilmeBinding;
 import com.example.galdino.filmespopulares.dominio.AnimationControler;
 import com.example.galdino.filmespopulares.dominio.Filme;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Comentarios;
 import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Result;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Videos;
 import com.example.galdino.filmespopulares.mvp.di.AppComponent;
 import com.example.galdino.filmespopulares.mvp.di.DaggerAppComponent;
 import com.example.galdino.filmespopulares.mvp.di.modules.ModelModule;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -37,7 +42,7 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     private boolean mFgListaTrailerAberta;
 //    private Filme filme;
     private AppDataBase db;
-    private Menu menu;
+    private Videos mVideos;
 
     private AdapterListTrailers.ListenerAdapter mListener = new AdapterListTrailers.ListenerAdapter() {
         @Override
@@ -100,7 +105,10 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
         if(filme != null && mBinding != null)
         {
             mBinding.labelTrailer.setOnClickListener(this);
+            mBinding.labelComentarios.setOnClickListener(this);
             mBinding.includeListTrailers.tvFecharListaTrailers.setOnClickListener(this);
+            mBinding.labelTrailer.setVisibility(View.VISIBLE);
+            mBinding.labelComentarios.setVisibility(View.VISIBLE);
 
             mFilme = filme;
             db = AppDataBase.getInstance(getContext().getApplicationContext());
@@ -130,17 +138,27 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
 
             if(filme.getVideos() != null)
             {
-                AdapterListTrailers adapterListTrailers = new AdapterListTrailers(filme.getVideos().getResults());
-                if(mListener != null) {
-                    adapterListTrailers.setListener(mListener);
-                }
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext().getApplicationContext());
-
-                mBinding.includeListTrailers.rvTrailers.setAdapter(adapterListTrailers);
-                mBinding.includeListTrailers.rvTrailers.setLayoutManager(linearLayoutManager);
-                mBinding.includeListTrailers.rvTrailers.setNestedScrollingEnabled(false);
+                mVideos = filme.getVideos();
+                openTrailers(filme.getVideos());
             }
         }
+        mBinding.pbLoading.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onComentariosPreparado(List<Result> comentarios) {
+        openComentarios(comentarios);
+        mFgListaTrailerAberta = true;
+        AnimationControler.upShowView(mBinding.includeListTrailers.constraintTrailer,getContext().getApplicationContext());
+        mBinding.includeListTrailers.tvFecharListaTrailers.setFocusable(true);
+        mBinding.pbLoading.setVisibility(View.INVISIBLE);
+    }
+
+
+    @Override
+    public void onComentarioFalhaAoBuscarInformacoes() {
+        Toast.makeText(getContext().getApplicationContext(),getString(R.string.erro_busca_comentario), Toast.LENGTH_SHORT).show();
+        fecharListaTrailer();
         mBinding.pbLoading.setVisibility(View.INVISIBLE);
     }
 
@@ -149,18 +167,23 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
         int id = item.getItemId();
         if(id == R.id.im_filmes_detalhe_favorito)
         {
-            if(mFilme.getFgFavorito() == 1)
-            {
-                item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(),R.drawable.ic_favorito_vazio_azul));
-                mFilme.setFgFavorito(0);
-                db.filmeDAO().deleteAll(mFilme);
-            }
-            else
-            {
-                item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(),R.drawable.ic_favorito_preenchido_azul));
-                mFilme.setFgFavorito(1);
-                if(mFilme.getUid() == 0) {
-                    db.filmeDAO().insertAll(mFilme);
+            if(mFilme != null) {
+                if (mFilme.getFgFavorito() == 1) {
+                    item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(), R.drawable.ic_favorito_vazio_azul));
+                    mFilme.setFgFavorito(0);
+                    db.filmeDAO().deleteAll(mFilme);
+                    if (mFilme.getVideos() != null && mFilme.getVideos().getResults() != null && mFilme.getVideos().getResults().size() > 0) {
+                        db.resultDAO().deleteById(mFilme.getVideos().getResults());
+                    }
+                } else {
+                    item.setIcon(ContextCompat.getDrawable(getContext().getApplicationContext(), R.drawable.ic_favorito_preenchido_azul));
+                    mFilme.setFgFavorito(1);
+                    if (mFilme.getUid() == 0) {
+                        db.filmeDAO().insertAll(mFilme);
+                        if (mFilme.getVideos() != null && mFilme.getVideos().getResults() != null && mFilme.getVideos().getResults().size() > 0) {
+                            db.resultDAO().insertAll(mFilme.getVideos().getResults());
+                        }
+                    }
                 }
             }
         }
@@ -179,18 +202,29 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
     }
 
     @Override
-    public void onClick(View v) {
-        if (v == mBinding.labelTrailer)
-        {
-            mFgListaTrailerAberta = true;
-//            AnimationControler.translateShow(mBinding.ivSombra,getContext().getApplicationContext());
-            AnimationControler.upShowView(mBinding.includeListTrailers.constraintTrailer,getContext().getApplicationContext());
-            mBinding.includeListTrailers.tvFecharListaTrailers.setFocusable(true);
-        }
-        else if(v == mBinding.includeListTrailers.tvFecharListaTrailers)
+    public void onClick(View v)
+    {
+        if(v == mBinding.includeListTrailers.tvFecharListaTrailers)
         {
             fecharListaTrailer();
         }
+        else if(v == mBinding.labelComentarios)
+        {
+            mBinding.pbLoading.setVisibility(View.VISIBLE);
+            mPresenter.getComentarios(mFilme.getId());
+        }
+        else if (v == mBinding.labelTrailer)
+        {
+            if(mVideos != null)
+            {
+                openTrailers(mVideos);
+                mFgListaTrailerAberta = true;
+                //            AnimationControler.translateShow(mBinding.ivSombra,getContext().getApplicationContext());
+                AnimationControler.upShowView(mBinding.includeListTrailers.constraintTrailer, getContext().getApplicationContext());
+                mBinding.includeListTrailers.tvFecharListaTrailers.setFocusable(true);
+            }
+        }
+
     }
 
     public boolean listaTrailerAberta()
@@ -207,7 +241,6 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
 
     @Override
     public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
-        this.menu = menu;
         MenuInflater menuInflater = getActivity().getMenuInflater();
         menuInflater.inflate(R.menu.menu_activity_filmes_detalhe,menu);
         if(mFilme != null && mFilme.getUid() > 0)
@@ -215,5 +248,28 @@ public class FilmeDetalheFragment extends Fragment implements FilmeDetalheMvpVie
             mFilme.setFgFavorito(0); // Passa false pra ficar true
             onOptionsItemSelected(menu.findItem(R.id.im_filmes_detalhe_favorito));
         }
+    }
+
+    private void openComentarios(List<Result> comentarios)
+    {
+        AdapterListComentario adapterListComentarios = new AdapterListComentario(comentarios);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext().getApplicationContext());
+
+        mBinding.includeListTrailers.rvTrailers.setAdapter(adapterListComentarios);
+        mBinding.includeListTrailers.rvTrailers.setLayoutManager(linearLayoutManager);
+        mBinding.includeListTrailers.rvTrailers.setNestedScrollingEnabled(false);
+    }
+
+    private void openTrailers(Videos videos)
+    {
+        AdapterListTrailers adapterListTrailers = new AdapterListTrailers(videos.getResults());
+        if(mListener != null) {
+            adapterListTrailers.setListener(mListener);
+        }
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext().getApplicationContext());
+
+        mBinding.includeListTrailers.rvTrailers.setAdapter(adapterListTrailers);
+        mBinding.includeListTrailers.rvTrailers.setLayoutManager(linearLayoutManager);
+        mBinding.includeListTrailers.rvTrailers.setNestedScrollingEnabled(false);
     }
 }

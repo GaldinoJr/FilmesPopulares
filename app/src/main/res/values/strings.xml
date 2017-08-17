@@ -23,4 +23,6 @@
     <string name="erro_buscar_detalhe_filme">Erro ao obter informações do filme</string>
     <string name="favoritos">Favoritos</string>
     <string name="filmes_favoritados">Filmes favoritados</string>
+    <string name="comentarios">Comentários</string>
+    <string name="erro_busca_comentario">Erro ao buscar os comentários</string>
 </resources>

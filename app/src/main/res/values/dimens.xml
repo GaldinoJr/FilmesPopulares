@@ -10,4 +10,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="iv_size_play">50dp</dimen>
     <dimen name="tv_size_nome_trailer">20sp</dimen>
+    <dimen name="tv_size_comentario">14dp</dimen>
 </resources>

@@ -6,6 +6,9 @@ import com.example.galdino.filmespopulares.dataBase.AppDataBase;
 import com.example.galdino.filmespopulares.dominio.ObjetoListaFilmes;
 import com.example.galdino.filmespopulares.R;
 import com.example.galdino.filmespopulares.dominio.Filme;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Comentarios;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Result;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Videos;
 
 import java.util.List;
 
@@ -25,6 +28,7 @@ import retrofit2.http.Query;
 
 public class MovieDbApiHelper implements FilmeApiMvpHelper
 {
+    private static final String METODO_COMENTARIOS_FILME = "reviews";
     private static final String METODO_POPULAR = "popular";
     private static final String METODO_MELHOR_AVALIADO = "top_rated";
     private static final String URL_API = "https://api.themoviedb.org/3/movie/";
@@ -33,6 +37,7 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     private static final String VALUE_PARAMETER_FILME_DETALHE_TRAILERS = "videos";
 
     private static final String FILME_DETALHE_PATH_FILME_ID = "movieId";
+    private static final String FILME_DETALHE_PATH_FILME_REVIEWS = "reviews";
     private static final String FILME_DETALHE_PATH = "{" + FILME_DETALHE_PATH_FILME_ID + "}";
 
     //private static final String GET_MOVIE_PATH = "3/movie/{" + MOVIE_ID_PATH + "}";
@@ -63,6 +68,12 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
     }
 
     @Override
+    public Observable<List<Result>> getComentario(int idFilme) {
+        return mMovieDbApi.getComentarios(idFilme, mApiKey)
+                .flatMap(getComentariosResponseMapper());
+    }
+
+    @Override
     public Observable<List<Filme>> getFavorito() {
         AppDataBase db = AppDataBase.getInstance(mContext);
 
@@ -81,14 +92,13 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
         }
         else
         {
+            List<Result> list = db.resultDAO().getAllTrailers();
+            Videos videos = new Videos();
+            videos.setResults(list);
+            filme.setVideos(videos);
             filmeObservable = Observable.just(filme);
         }
         return filmeObservable;
-    }
-
-    @Override
-    public Observable<ObjetoListaFilmes> getMovieSummary(String movieId) {
-        return null;
     }
 
     // métodos do retrofit
@@ -112,6 +122,16 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
         };
     }
 
+    @android.support.annotation.NonNull
+    private Function<Comentarios, Observable<List<Result>>> getComentariosResponseMapper() {
+        return new Function<Comentarios, Observable<List<Result>>>() {
+            @Override
+            public Observable<List<Result>> apply(@NonNull Comentarios moviesResponseBody) throws Exception {
+
+                return Observable.just(moviesResponseBody.getResults());
+            }
+        };
+    }
 
     interface MovieDbApi {
 
@@ -125,5 +145,8 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
         Observable<Filme> getFilmeDetalhe(@Path(FILME_DETALHE_PATH_FILME_ID) int movieId,
                                           @Query(PARAMETER_FILME_DETALHE_CHAVE_API) String apiKey,
                                           @Query(PARAMETER_FILME_DETALHE_TRAILERS) String trailer);
+        @GET(FILME_DETALHE_PATH + "/" + FILME_DETALHE_PATH_FILME_REVIEWS)
+        Observable<Comentarios> getComentarios(@Path(FILME_DETALHE_PATH_FILME_ID) int movieId,
+                                               @Query(PARAMETER_FILME_DETALHE_CHAVE_API) String apiKey);
     }
 }

@@ -18,7 +18,7 @@ import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Videos;
  * Created by Galdino on 11/08/2017.
  */
 //, exportSchema = false
-@Database(entities = {Filme.class, Videos.class, Result.class}, version = 4)
+@Database(entities = {Filme.class, Videos.class, Result.class}, version = 5)
 public abstract class AppDataBase extends RoomDatabase
 {
     private static AppDataBase INSTANCE;

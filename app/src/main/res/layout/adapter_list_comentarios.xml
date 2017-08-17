@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/tv_nome_pessoa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="nome pessoa"
+        android:layout_margin="@dimen/margem_padrao"
+        android:textSize="@dimen/tv_size_nome_trailer"
+        android:textColor="@color/c_azul_claro"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/tv_comentario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="ja´djfdsjfsdkfdsjnfks"
+        android:layout_margin="@dimen/margem_padrao"
+        android:textSize="@dimen/tv_size_comentario"
+        android:textColor="@color/c_azul_claro"
+        />
+
+</LinearLayout>
+</layout>

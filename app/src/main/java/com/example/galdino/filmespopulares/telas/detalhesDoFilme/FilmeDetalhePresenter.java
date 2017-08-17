@@ -1,8 +1,12 @@
 package com.example.galdino.filmespopulares.telas.detalhesDoFilme;
 
 import com.example.galdino.filmespopulares.dominio.Filme;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Comentarios;
+import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Result;
 import com.example.galdino.filmespopulares.mvp.BasePresenter;
 import com.example.galdino.filmespopulares.mvp.schedulerprovider.SchedulerProvider;
+
+import java.util.List;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;
@@ -42,6 +46,34 @@ public class FilmeDetalhePresenter extends BasePresenter<FilmeDetalheMvpView> im
                 .subscribe(getFilmeObserver());
     }
 
+    @Override
+    public void getComentarios(int idFilme) {
+        SchedulerProvider schedulerProvider = getSchedulerProvider();
+        mMvpModel.getComentarioFilme(idFilme)
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .subscribe(getComentarioObserver());
+    }
+
+    private SingleObserver<List<Result>> getComentarioObserver() {
+        return new SingleObserver<List<Result>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull List<Result> comentarios) {
+                mMvpView.onComentariosPreparado(comentarios);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                mMvpView.onComentarioFalhaAoBuscarInformacoes();
+            }
+        };
+    }
+
     private SingleObserver<Filme> getFilmeObserver() {
         return new SingleObserver<Filme>() {
             @Override
@@ -76,6 +108,16 @@ public class FilmeDetalhePresenter extends BasePresenter<FilmeDetalheMvpView> im
 
             @Override
             public void onFilmeDetalhePreparado(Filme filme) {
+
+            }
+
+            @Override
+            public void onComentariosPreparado(List<Result> comentarios) {
+
+            }
+
+            @Override
+            public void onComentarioFalhaAoBuscarInformacoes() {
 
             }
         };

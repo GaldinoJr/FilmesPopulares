@@ -66,4 +66,13 @@ public class ListFilmesActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_frament_list, fragment).commit();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mBinding.tvLabelTiposFilmes.getText() != null && mBinding.tvLabelTiposFilmes.getText().equals(getResources().getString(R.string.filmes_favoritados)))
+        {
+            inflarFragment(ListFilmFragment.DF_FILMES_FAVORITOS);
+        }
+    }
 }
