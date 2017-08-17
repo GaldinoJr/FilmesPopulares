@@ -13,6 +13,8 @@ import com.example.galdino.filmespopulares.dominio.filmeDetalhe.Videos;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import retrofit2.Retrofit;
@@ -72,6 +74,21 @@ public class MovieDbApiHelper implements FilmeApiMvpHelper
         return mMovieDbApi.getComentarios(idFilme, mApiKey)
                 .flatMap(getComentariosResponseMapper());
     }
+
+    // Para não travar a UI
+    //    public Observable<List<Filme>> getFavorito(final Context context) {
+//        return Observable.create(new ObservableOnSubscribe<List<Filme>>() {
+//            @Override
+//            public void subscribe(@NonNull ObservableEmitter<List<Filme>> e) throws Exception {
+//                AppDataBase db = AppDataBase.getInstance(context);
+//                List<Filme> filmes = db.filmeDAO().getAll();
+////                for (Filme filme : filmes) {
+////                    e.onNext(filme);
+////                }
+//                e.onNext(filmes);
+//                e.onComplete();
+//            }
+//        });
 
     @Override
     public Observable<List<Filme>> getFavorito() {
