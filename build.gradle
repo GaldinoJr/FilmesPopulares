@@ -15,16 +15,20 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {url 'https://maven.google.com'}
     }
 
     project.ext{
         androidLibrariesVersion = "25.1.0"
         buildToolsVersion = "25.0.2"
-        mockitoVersion = "2.0.2-beta"
 
         rxjavaVersion = "2.1.1"
         rxandroidVersion = "2.0.1"
+
         daggerVersion = "2.11"
+        mockitoVersion = "2.0.2-beta"
+
+        archRoomVersion = "1.0.0-alpha1"
     }
 }
 
